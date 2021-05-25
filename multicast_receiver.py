@@ -19,6 +19,8 @@ def alive():
 
 def receive():
 	_thread.start_new_thread( alive, () )
+	
+	host = get_ip.get_lan_ip()
 	MCAST_GRP = '224.1.1.1'
 	MCAST_PORT = 5007
 
@@ -32,9 +34,6 @@ def receive():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 ) 
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_LOOP, 1 )
 	sock.bind( ( MCAST_GRP, MCAST_PORT ) )
-	
-	host = get_ip.get_lan_ip()
-	
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	
