@@ -1,7 +1,6 @@
 from http.client import HTTPConnection
 import urllib
-import multicast_receiver
-import multicast_sender
+import multicast
 import random
 
 params = { 'token' : 0, 'starting': 0, 'total': 0 }
@@ -22,7 +21,7 @@ def connect():
 		pass
 	try:
 		multicast_receiver.lock.acquire()
-		connection = HTTPConnection( random.choice( list( multicast_receiver.ips.keys() ) ), 5000, timeout=10 )
+		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast_receiver.lock.release()
 		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
 		response = connection.getresponse()
