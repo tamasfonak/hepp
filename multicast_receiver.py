@@ -36,7 +36,7 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 
-	while 1:
+	while True:
 		try:
 			data, addr = sock.recvfrom( 1024 )
 			if data.decode() != host:
