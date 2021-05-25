@@ -3,10 +3,18 @@ import urllib
 import multicast
 import random
 
-params = { 'token' : 0, 'starting': 0, 'total': 0 }
-headers = { 'Content-type': 'application/x-www-form-urlencoded', 'Accept': 'text/plain' }
+params = { 
+	'token': 0,
+	'distance': 0;
+	'starting': 0, 
+	'total': 0,
+}
+headers = { 
+	'Content-type': 'application/x-www-form-urlencoded', 
+	'Accept': 'text/plain' 
+}
 
-def compute_videos( starting=0, _total=0 ):
+def compute_videos( starting = 0, total = 0 ):
 	print( "Hasn't been defined!" )
 
 videos= compute_videos
