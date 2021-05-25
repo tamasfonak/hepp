@@ -45,3 +45,5 @@ def receive():
 				lock.release()
 		except socket.error:
 			print ( 'Expection' )
+      			hexdata = binascii.hexlify( data )
+     			print 'Data = %s' % hexdata
