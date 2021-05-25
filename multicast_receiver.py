@@ -5,7 +5,6 @@ import threading
 import _thread
 import get_ip
 
-
 ips = {}
 lock = threading.Lock()
 def alive():
@@ -14,7 +13,6 @@ def alive():
 			lock.acquire()
 			if ( time.time() - ips[ ip ] ) > 5:
 				ips.pop( ip )
-				print( ips )
 			lock.release()
 		time.sleep( 5 )
 
@@ -41,7 +39,6 @@ def receive():
 	while 1:
 		try:
 			data, addr = sock.recvfrom( 1024 )
-
 			if data.decode() != host:
 				lock.acquire()
 				ips[ data ] = time.time()
