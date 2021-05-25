@@ -30,7 +30,6 @@ def connect():
 		pass
 	try:
 		multicast_receiver.lock.acquire()
-		print( multicast_receiver.ips.keys() )
 		connection = HTTPConnection( random.choice( list( multicast_receiver.ips.keys() ) ), 5000, timeout=10 )
 		multicast_receiver.lock.release()
 		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
