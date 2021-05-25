@@ -23,8 +23,8 @@ def my_form_post():
 	return 1
 
 def start():
-	_thread.start_new_thread( token_sending.multicast_receiver.receive, () )
-	_thread.start_new_thread( token_sending.multicast_sender.send, () )
+	_thread.start_new_thread( token_sending.multicast.receive, () )
+	_thread.start_new_thread( token_sending.multicast.send, () )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	else:
