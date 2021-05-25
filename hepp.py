@@ -1,7 +1,7 @@
 import TokenRing
 
-def compute_primes( starting=0, _total=0 ):
+def compute_primes( starting=0, total=0 ):
 	return ( starting, total )
 
-TokenRing.token_sending.primes = compute_video
+TokenRing.token_sending.videos = compute_videos
 TokenRing.start()
