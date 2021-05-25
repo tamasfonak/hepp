@@ -44,6 +44,5 @@ def receive():
 				ips[ data ] = time.time()
 				lock.release()
 		except socket.error:
-			print ( 'Expection' )
-      			hexdata = binascii.hexlify( data )
-     			print 'Data = %s' % hexdata
+			print ( 'socket.error: ' )
+      			print ( binascii.hexlify( data ) )
