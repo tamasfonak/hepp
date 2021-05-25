@@ -10,10 +10,10 @@ headers = { 'Content-type': 'application/x-www-form-urlencoded', 'Accept': 'text
 def compute_videos( starting=0, _total=0 ):
 	print( "Hasn't been defined!" )
 
-video= compute_videos
+videos= compute_videos
 
 def set_videos():
-	val = video( params[ 'starting' ], params[ 'total' ] )
+	val = videos( params[ 'starting' ], params[ 'total' ] )
 	params[ 'starting' ] = val[ 0 ]
 	params[ 'total' ] = val[ 1 ]
 
