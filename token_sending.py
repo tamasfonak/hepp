@@ -1,6 +1,4 @@
-from blessed import Terminal
 from http.client import HTTPConnection
-# import json
 import urllib
 import time
 import multicast_receiver
@@ -8,11 +6,8 @@ import multicast_sender
 import random
 import screen_color
 
-term = Terminal()
-height, width = term.height, term.width
 params = { 'token' : 0, 'starting': 0, 'total': 0 }
 headers = { 'Content-type': 'application/x-www-form-urlencoded', 'Accept': 'text/plain' }
-# headers = { 'Content-type': 'application/json' }
 
 def compute_primes( starting=0, _total=0 ):
 	print( "Hasn't been defined!" )
@@ -33,7 +28,6 @@ def connect():
 		connection = HTTPConnection( random.choice( list( multicast_receiver.ips.keys() ) ), 5000, timeout=10 )
 		multicast_receiver.lock.release()
 		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
-#		connection.request( "POST", "/", json.dumps(params ), headers )
 		response = connection.getresponse()
 		return True
 	except multicast_receiver.socket.error:
@@ -46,5 +40,4 @@ def send_token():
 		print( "Something went wrong" )
 	else:
 		params[ 'token' ] = 0
-		screen_color.color( "red" )
 	return 1
