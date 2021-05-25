@@ -4,21 +4,19 @@ import time
 import multicast_receiver
 import multicast_sender
 import random
-import screen_color
 
 params = { 'token' : 0, 'starting': 0, 'total': 0 }
 headers = { 'Content-type': 'application/x-www-form-urlencoded', 'Accept': 'text/plain' }
 
-def compute_primes( starting=0, _total=0 ):
+def compute_videos( starting=0, _total=0 ):
 	print( "Hasn't been defined!" )
 
-primes = compute_primes
+video= compute_videos
 
-def set_primes():
-	val = primes( params[ 'starting' ], params[ 'total' ] )
+def set_videos():
+	val = video( params[ 'starting' ], params[ 'total' ] )
 	params[ 'starting' ] = val[ 0 ]
 	params[ 'total' ] = val[ 1 ]
-
 
 def connect():
 	while len( multicast_receiver.ips ) < 1:
@@ -33,11 +31,10 @@ def connect():
 	except multicast_receiver.socket.error:
 		return connect()
 
-
 def send_token():
-	set_primes()
+	set_videos()
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
 		params[ 'token' ] = 0
-	return 1
+	return True
