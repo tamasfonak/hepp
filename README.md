@@ -8,19 +8,10 @@ sudo systemctl unmask hostapd
 sudo systemctl disable hostapd
 sudo systemctl disable dnsmasq
 ```
-This site was built using [Here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/158-raspberry-pi-auto-wifi-hotspot-switch-direct-connection)
+This site was built using [Here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
 ```
-sudo nano /etc/hostapd/hostapd.conf
-sudo nano /etc/default/hostapd
-sudo nano /etc/dnsmasq.conf
-sudo nano /etc/network/interfaces
-sudo cp /etc/network/interfaces /etc/network/interfaces-backup
-sudo nano /etc/sysctl.conf
-sudo nano /etc/dhcpcd.conf
-sudo nano /etc/systemd/system/autohotspot.service
-sudo systemctl enable autohotspot.service
-sudo nano /usr/bin/autohotspotN
-sudo chmod +x /usr/bin/autohotspotN
+cd ./Autohotspot
+sudo ./autohotspot-setup.sh
 ```
 pip3 install omxplayer-wrapper
 
