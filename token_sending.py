@@ -31,10 +31,10 @@ def connect():
 	try:
 		multicast_receiver.lock.acquire()
 		print( multicast_receiver.ips.keys() )
-		connection = HTTPConnection( random.choice( list( multicast_receiver.ips.keys() ) ), 5000, timeout=10)
+		connection = HTTPConnection( random.choice( list( multicast_receiver.ips.keys() ) ), 5000, timeout=10 )
 		multicast_receiver.lock.release()
-		connection.request("POST", "/", urllib.parse.urlencode(params), headers)
-#		connection.request("POST", "/", json.dumps(params), headers)
+		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
+#		connection.request( "POST", "/", json.dumps(params ), headers )
 		response = connection.getresponse()
 		return True
 	except multicast_receiver.socket.error:
@@ -47,5 +47,5 @@ def send_token():
 		print( "Something went wrong" )
 	else:
 		params[ 'token' ] = 0
-		screen_color.color("red")
+		screen_color.color( "red" )
 	return 1
