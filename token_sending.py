@@ -1,8 +1,6 @@
 from http.client import HTTPConnection
 import urllib
-import time
 import multicast_receiver
-import multicast_sender
 import random
 
 params = { 'token' : 0, 'starting': 0, 'total': 0 }
