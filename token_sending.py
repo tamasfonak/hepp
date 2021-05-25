@@ -47,5 +47,5 @@ def send_token():
 		print( "Something went wrong" )
 	else:
 		params[ 'token' ] = 0
-		#screen_color.color("red")
+		screen_color.color("red")
 	return 1
