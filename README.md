@@ -13,5 +13,7 @@ sudo ./autohotspot-setup.sh
 ```
 sudo apt install -y libdbus-1{,-dev}
 pip3 install omxplayer-wrapper
-python3 hepp.py
+git clone https://github.com/tamasfonak/hepp
+cd ./hepp
+python3 ./hepp.py
 ```
