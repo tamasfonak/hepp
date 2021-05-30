@@ -3,6 +3,7 @@
 ```
 sudo apt update
 sudo apt upgrade
+sudo apt install git
 git clone https://github.com/tamasfonak/hepp
 ```
 Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
