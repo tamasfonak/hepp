@@ -3,6 +3,7 @@
 ```
 sudo apt update
 sudo apt upgrade
+git clone https://github.com/tamasfonak/hepp
 ```
 Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
 ```
@@ -13,7 +14,6 @@ sudo ./autohotspot-setup.sh
 ```
 sudo apt install -y libdbus-1{,-dev}
 pip3 install omxplayer-wrapper
-git clone https://github.com/tamasfonak/hepp
 cd ./hepp
 python3 ./hepp.py
 ```
