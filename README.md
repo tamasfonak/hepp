@@ -7,6 +7,7 @@ sudo apt install git
 git clone https://github.com/tamasfonak/hepp
 ```
 Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
+
 Log2Ram from [here](https://github.com/azlux/log2ram)
 ```
 cd ./hepp/Autohotspot
