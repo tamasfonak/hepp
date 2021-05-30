@@ -46,8 +46,7 @@ def receive():
 				ips[ data ] = time.time()
 				lock.release()
 		except socket.error:
-			print( 'socket.error: ' )
-      			print(binascii.hexlify(data))
+      			print( binascii.hexlify( data ) )
 
 def send():
 	host = get_ip.get_lan_ip()
