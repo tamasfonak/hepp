@@ -14,8 +14,10 @@ sudo ./autohotspot-setup.sh
 ```
 **Run:**
 ```
-sudo apt install -y libdbus-1{,-dev}
-pip3 install omxplayer-wrapper
+sudo apt install omxplayer python3-pip
+sudo pip3 install omxplayer-wrapper
+sudo pip3 install Flask
 cd ./hepp
+chmod 0775 ./*
 python3 ./hepp.py
 ```
