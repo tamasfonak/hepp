@@ -5,7 +5,7 @@ import random
 
 params = { 
 	'token': 0,
-	'distance': 0;
+	'distance': 0,
 	'starting': 0, 
 	'total': 0,
 }
