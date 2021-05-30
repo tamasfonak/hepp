@@ -9,6 +9,7 @@ git clone https://github.com/tamasfonak/hepp
 Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
 ```
 cd ./hepp/Autohotspot
+chmod 0775 ./autohotspot-setup.sh
 sudo ./autohotspot-setup.sh
 ```
 **Run:**
