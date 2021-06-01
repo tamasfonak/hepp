@@ -10,7 +10,7 @@ if token == "y":
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
-app = Flask( __main__ )
+app = Flask( __name__ )
 
 @app.before_first_request
 def activate_job():
@@ -32,4 +32,5 @@ def main_route():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
+	print(app.before_first_request_funcs)
 	app.run( port = 5000, host='0.0.0.0' )
