@@ -23,7 +23,6 @@ class HttpHandler( BaseHTTPRequestHandler ):
         print ('Before calling socket.listen()')
     @classmethod
     def post_start(cls):
-        print ('After calling socket.listen()')
 	if ( params[ 'token' ] == 1 ):
 		send_token()
     @classmethod
