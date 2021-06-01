@@ -11,15 +11,8 @@ elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
 app = Flask( __name__ )
-
-@app.before_first_request
-def activate_job():
-	print( "activate_job" )
-	app.logger.info( "activate_job" )
-	if ( token_sending.params[ 'token' ] == 1 ):
-		token_sending.send_token()
 	
-@app.route( '/', methods=['POST'] )
+@app.route( '/', methods=[ 'POST' ] )
 def main_route():
 	app.logger.info( "main route" )
 	text = request.form[ 'token' ]
@@ -33,4 +26,6 @@ def main_route():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
+	if ( token_sending.params[ 'token' ] == 1 ):
+		token_sending.send_token()
 	app.run( port = 5000, host='0.0.0.0' )
