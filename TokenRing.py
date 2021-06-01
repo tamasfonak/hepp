@@ -14,7 +14,7 @@ elif token == "n":
 
 @app.before_first_request
 def activate_job():
-	print( "Server Started" )
+	app.logger.info( "before_first_request" )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	
