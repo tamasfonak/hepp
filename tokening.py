@@ -61,7 +61,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
-		
+		time.sleep( 1 )
 		_thread.start_new_thread( send_token, () )
         
 def listen():
