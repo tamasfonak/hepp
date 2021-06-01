@@ -14,7 +14,7 @@ hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.he
 hepp.pause()
 
 def compute_token( params ):
-	# measure.distance()
+	print( params )
 	return ( params )
 
 TokenRing.token_sending.videos = compute_token
