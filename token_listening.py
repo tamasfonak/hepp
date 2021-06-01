@@ -23,7 +23,7 @@ class Server(BaseHTTPRequestHandler):
         message = json.loads( self.rfile.read( length ) )
         message[ 'received' ] = 'ok'
         self._set_headers()
-        self.wfile.write( json.dumps( message ) )
+        self.wfile.write( json.dumps( message ).encode() )
         
 def run( server_class=HTTPServer, handler_class=Server, port=5000 ):
     server_address = ( '', port )
