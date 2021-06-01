@@ -17,8 +17,8 @@ def my_form_post():
 	text = request.form[ 'token' ]
 	if ( text == '1' ):
 		token_sending.params[ 'token' ] = 1
-		token_sending.params[ 'distance' ] = request.form[ 'distance' ] )
-		token_sending.params[ 'total' ] = int( request.form[ 'total' ] )
+		#token_sending.params[ 'distance' ] = request.form[ 'distance' ] )
+		#token_sending.params[ 'total' ] = int( request.form[ 'total' ] )
 	_thread.start_new_thread( token_sending.send_token, () )
 	return True
 
