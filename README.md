@@ -1,4 +1,8 @@
 
+Megvizsgálni [here](https://pymotw.com/2/socket/tcp.html)
+
+
+
 **Requirements:**
 ```
 sudo apt update
