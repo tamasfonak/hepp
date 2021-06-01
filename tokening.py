@@ -44,7 +44,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		self._set_headers()
 	def do_GET( self ):
 		self._set_headers()
-		self.wfile.write( json.dumps( { 'hello': 'world', 'received': 'ok' } ).encode() )
+		self.wfile.write( json.dumps( { 'HEPP': '0.1' } ).encode() )
 	def do_POST( self ):
 		ctype, pdict = cgi.parse_header( self.headers.get( 'content-type' ) )
 		if ctype != 'application/json':
@@ -53,9 +53,10 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		message = json.loads( self.rfile.read( length ) )
-		message[ 'received' ] = 'ok'
+		message[ 'token' ] = 1
 		self._set_headers()
 		self.wfile.write( json.dumps( message ).encode() )
+		_thread.start_new_thread( send_token, () )
         
 def listen():
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
