@@ -14,6 +14,7 @@ app = Flask( __name__ )
 
 @app.before_first_request
 def activate_job():
+	print( "activate_job" )
 	app.logger.info( "activate_job" )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
