@@ -26,8 +26,8 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
-		#connection.request( "POST", "/", json.dumps( params ), headers )
-		#response = connection.getresponse()
+		connection.request( "POST", "/", json.dumps( params ), headers )
+		response = connection.getresponse()
 		return True
 	except multicast.socket.error:
 		return connect()
@@ -37,6 +37,5 @@ def send_token():
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
-		print( 'token = 0' )
 		params[ 'token' ] = 0
 	return True
