@@ -1,12 +1,6 @@
 import _thread
 import token_listening
 import token_sending
-
-token = input( "Do I start with the token? y/n: " )
-if token == "y":
-	token_sending.params[ 'token' ] = 1
-elif token == "n":
-	token_sending.params[ 'token' ] == 0
 	
 def main_route():
 	text = request.form[ 'token' ]
