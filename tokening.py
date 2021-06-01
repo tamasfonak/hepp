@@ -46,12 +46,12 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		self._set_headers()
 		self.wfile.write( json.dumps( { 'hello': 'world', 'received': 'ok' } ).encode() )
 	def do_POST( self ):
-		ctype, pdict = cgi.parse_header( self.headers.getheader( 'content-type' ) )
+		ctype, pdict = cgi.parse_header( self.headers.get( 'content-type' ) )
 		if ctype != 'application/json':
 			self.send_response( 400 )
 			self.end_headers()
 			return
-		length = int( self.headers.getheader( 'content-length' ) )
+		length = int( self.headers.get( 'content-length' ) )
 		message = json.loads( self.rfile.read( length ) )
 		message[ 'received' ] = 'ok'
 		self._set_headers()
