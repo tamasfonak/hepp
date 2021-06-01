@@ -4,13 +4,13 @@ from flask import request
 import _thread
 import token_sending
 
-app = Flask(__name__)
-
 token = input( "Do I start with the token? y/n: " )
 if token == "y":
 	token_sending.params[ 'token' ] = 1
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
+
+app = Flask(__name__)
 
 @app.before_first_request
 def activate_job():
