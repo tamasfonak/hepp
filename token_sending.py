@@ -2,7 +2,6 @@ from http.client import HTTPConnection
 import urllib
 import multicast
 import random
-import time
 
 params = { 'token': 1 }
 headers = { 
@@ -31,7 +30,6 @@ def connect():
 		response = connection.getresponse()
 		return True
 	except multicast.socket.error:
-		time.sleep( 3 )
 		return connect()
 
 def send_token():
