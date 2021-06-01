@@ -14,12 +14,13 @@ app = Flask(__name__)
 
 @app.before_first_request
 def activate_job():
-	app.logger.info( "before_first_request" )
+	app.logger.info( "activate_job" )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	
 @app.route( '/', methods=['POST'] )
-def my_form_post():
+def main_route():
+	app.logger.info( "main route" )
 	text = request.form[ 'token' ]
 	if ( text == '1' ):
 		token_sending.params[ 'token' ] = 1
@@ -31,4 +32,4 @@ def my_form_post():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	app.run( port = 5000, host='0.0.0.0', use_reloader=False, debug = True )
+	app.run( port = 5000, host='0.0.0.0' )
