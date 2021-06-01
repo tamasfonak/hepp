@@ -54,10 +54,10 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
 		print( "params", params )
-		#params[ 'token' ] = 1
 		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
+		
 		time.sleep( 3 )
 		_thread.start_new_thread( send_token, () )
         
@@ -65,7 +65,6 @@ def listen():
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000')
 	httpd.serve_forever()
-
 
 headers = { 
 	'Content-type': 'application/json', 
