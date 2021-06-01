@@ -18,7 +18,10 @@ hepp.pause()
 
 def compute_token( params ):
 	print( 'compute_token: ', params )
-	params[ 'token' ] = 1
+	if paramms[ 'token' ] == 1:
+		tokening.time.sleep( 3 )
+		print( 'video' )
+		params[ 'token' ] = 1 
 	return ( params )
 
 tokening.set_token = compute_token
