@@ -31,4 +31,4 @@ def my_form_post():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	app.run( port = 5000, host='0.0.0.0', debug = True )
+	app.run( port = 5000, host='0.0.0.0', use_reloader=False, debug = True )
