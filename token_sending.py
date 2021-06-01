@@ -3,7 +3,7 @@ import json
 import multicast
 import random
 
-params = { 'token': 0 }
+params = { 'token': 1 }
 headers = { 
 	'Content-type': 'application/json', 
 	'Accept': 'text/plain' 
@@ -26,8 +26,8 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
-		connection.request( "POST", "/", json.dumps( params ), headers )
-		response = connection.getresponse()
+		#connection.request( "POST", "/", json.dumps( params ), headers )
+		#response = connection.getresponse()
 		return True
 	except multicast.socket.error:
 		return connect()
