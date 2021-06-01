@@ -24,6 +24,8 @@ class HttpHandler( BaseHTTPRequestHandler ):
     @classmethod
     def post_start(cls):
         print ('After calling socket.listen()')
+	if ( params[ 'token' ] == 1 ):
+		send_token()
     @classmethod
     def pre_stop(cls):
         print ('Before calling socket.close()')
