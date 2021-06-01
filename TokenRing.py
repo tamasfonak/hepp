@@ -11,6 +11,7 @@ elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 
 @app.before_first_request
 def activate_job():
