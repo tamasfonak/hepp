@@ -20,15 +20,6 @@ def compute_token( params ):
 	print( params )
 	return ( params )
 
-def main_route():
-	text = request.form[ 'token' ]
-	if ( text == '1' ):
-		tokening.params[ 'token' ] = 1
-		#token_sending.params[ 'distance' ] = request.form[ 'distance' ]
-		#token_sending.params[ 'total' ] = int( request.form[ 'total' ] )
-	_thread.start_new_thread( tokening.send_token, () )
-	return True
-
 tokening.token = compute_token
 _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
