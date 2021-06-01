@@ -13,7 +13,7 @@ loop = OMXPlayer( videos[ 'floorLoop' ], args=['--loop'], dbus_name='org.mpris.M
 hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
 hepp.pause()
 
-def compute_videos( starting = 0, total = 0 ):
+def compute_token( starting = 0, total = 0 ):
 	# measure.distance()
 	return ( starting, total )
 
