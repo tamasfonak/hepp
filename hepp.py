@@ -20,7 +20,7 @@ def compute_token( params ):
 	print( 'compute_token: ', params )
 	return ( params )
 
-tokening.token = compute_token
+tokening.set_token = compute_token
 _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
