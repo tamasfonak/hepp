@@ -50,6 +50,6 @@ class HttpHandler( BaseHTTPRequestHandler ):
         self.wfile.write( json.dumps( message ).encode() )
         
 def run():
-    httpd = CallbackHTTPServer( ( '', 5000 ), Server ) 
+    httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
     print ( 'Starting httpd on port: 5000')
     httpd.serve_forever()
