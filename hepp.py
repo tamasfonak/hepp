@@ -17,8 +17,11 @@ hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.he
 hepp.pause()
 
 def compute_video():
-	print( 'video' )
-	tokening.time.sleep( 3 )
+	loop.pause()
+	hepp.play_sync()
+	hepp.pause()
+	loop.play()
+	sleep( 3 )
 	tokening.params[ 'token' ] = 1
 	return True
 	
