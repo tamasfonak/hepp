@@ -30,7 +30,7 @@ def receive():
 	try:
 		sock.setsockopt( socket.SOL_SOCKET, socket.SO_REUSEADDR, 1 )
 	except AttributeError as error:
-		print ( error )
+		print ( 'AttributeError: ', error )
 
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 ) 
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_LOOP, 1 )
@@ -41,12 +41,11 @@ def receive():
 	while True:
 		try:
 			data, addr = sock.recvfrom( 1024 )
-			data.decode()
 			#if data.decode() != host: # Saja't IP-k kiza'rom?
 			ips[ data.decode() ] = time.time()
 			lock.release()
 		except socket.error:
-      			print( binascii.hexlify( data ) )
+      			print( 'socket.error: ', binascii.hexlify( data ) )
 
 def send():
 	host = get_ip.get_lan_ip()
