@@ -33,5 +33,4 @@ def main_route():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	print(app.before_first_request_funcs)
-	app.run( port = 5000, host='0.0.0.0' )
+	#app.run( port = 5000, host='0.0.0.0' )
