@@ -11,8 +11,17 @@ if token == "y":
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
-@app.route( '/', methods=['POST'] )
+@app.before_first_request
+def activate_job():
+    def run_job():
+        while True:
+            print( "Run recurring task" )
+            time.sleep(3)
 
+    _thread = threading.Thread( target = run_job )
+    _thread.start()
+	
+@app.route( '/', methods=['POST'] )
 def my_form_post():
 	text = request.form[ 'token' ]
 	if ( text == '1' ):
@@ -29,4 +38,4 @@ def start():
 		token_sending.send_token()
 	else:
 		pass
-	app.run( port = 5000, host='0.0.0.0' ) # Ezt elrakom ...
+	app.run( port = 5000, host='0.0.0.0' )
