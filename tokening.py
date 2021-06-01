@@ -73,11 +73,7 @@ headers = {
 def compute_token( params ):
 	print( "Hasn't been defined!" )
 
-token = compute_token
-
-def set_token:
-	val = token( params )
-	return val
+set_token = compute_token
 
 def connect():
 	while len( multicast.ips ) < 1:
@@ -93,7 +89,7 @@ def connect():
 		return connect()
 
 def send_token():
-	set_token()
+	set_token( params )
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
