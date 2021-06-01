@@ -16,7 +16,8 @@ token = compute_token
 
 def set_token():
 	val = token( params )
-	params[ 'token' ] = val[ 0 ]
+	print( val )
+	#params[ 'token' ] = val[ 0 ]
 
 def connect():
 	while len( multicast.ips ) < 1:
