@@ -13,13 +13,7 @@ elif token == "n":
 
 @app.before_first_request
 def activate_job():
-    def run_job():
-        while True:
-            print( "Run recurring task" )
-            time.sleep(3)
-
-    _thread = threading.Thread( target = run_job )
-    _thread.start()
+	print( "Server Started" )
 	
 @app.route( '/', methods=['POST'] )
 def my_form_post():
