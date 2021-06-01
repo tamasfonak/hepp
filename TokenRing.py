@@ -13,7 +13,10 @@ elif token == "n":
 
 @app.before_first_request
 def activate_job():
-	print( "Server Started" )
+	if ( token_sending.params[ 'token' ] == 1 ):
+		token_sending.send_token()
+	else:
+		pass
 	
 @app.route( '/', methods=['POST'] )
 def my_form_post():
@@ -28,8 +31,4 @@ def my_form_post():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	if ( token_sending.params[ 'token' ] == 1 ):
-		token_sending.send_token()
-	else:
-		pass
 	app.run( port = 5000, host='0.0.0.0' )
