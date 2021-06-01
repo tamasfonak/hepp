@@ -9,7 +9,7 @@ videos = {
 	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
-loop = OMXPlayer( videos[ 'floorLoop' ], dbus_name='org.mpris.MediaPlayer2.loop' )
+loop = OMXPlayer( videos[ 'floorLoop' ], args=['--loop'], dbus_name='org.mpris.MediaPlayer2.loop' )
 hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
 hepp.pause()
 
