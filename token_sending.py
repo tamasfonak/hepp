@@ -25,16 +25,16 @@ def set_videos():
 	params[ 'total' ] = val[ 1 ]
 
 def connect():
-	while len( multicast_receiver.ips ) < 1:
+	while len( multicast.ips ) < 1:
 		pass
 	try:
-		multicast_receiver.lock.acquire()
+		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
-		multicast_receiver.lock.release()
+		multicast.lock.release()
 		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
 		response = connection.getresponse()
 		return True
-	except multicast_receiver.socket.error:
+	except multicast.socket.error:
 		return connect()
 
 def send_token():
