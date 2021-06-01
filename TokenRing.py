@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import request
-from flask_script import Manager, Server
 
 import _thread
 import token_sending
@@ -14,18 +13,11 @@ if token == "y":
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
+@app.before_first_request
 def activate_job():
+	print( "Server Started" )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
-	else:
-		pass
-class CustomServer(Server):
-    def __call__(self, app, *args, **kwargs):
-        activate_job()
-        #Hint: Here you could manipulate app
-        return Server.__call__(self, app, *args, **kwargs)
-
-manager.add_command( 'runserver', CustomServer() )
 	
 @app.route( '/', methods=['POST'] )
 def my_form_post():
