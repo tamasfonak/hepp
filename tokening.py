@@ -52,7 +52,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
         self._set_headers()
         self.wfile.write( json.dumps( message ).encode() )
         
-def run():
+def listen():
     httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
     print ( 'Starting httpd on port: 5000')
     httpd.serve_forever()
