@@ -44,7 +44,6 @@ def receive():
 			data.decode()
 			#if data.decode() != host: # Saja't IP-k kiza'rom?
 			ips[ data.decode() ] = time.time()
-			print( data )
 			lock.release()
 		except socket.error:
       			print( binascii.hexlify( data ) )
