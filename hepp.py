@@ -24,7 +24,7 @@ def compute_video():
 	
 def compute_token( params ):
 	if params[ 'token' ] == 1:
-		_thread.start_new_thread( tokening.compute_video, () )
+		_thread.start_new_thread( compute_video, () )
 	return ( params )
 
 tokening.set_token = compute_token
