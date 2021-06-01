@@ -5,7 +5,6 @@ import _thread
 import token_sending
 
 app = Flask(__name__)
-manager = Manager( app )
 
 token = input( "Do I start with the token? y/n: " )
 if token == "y":
@@ -32,4 +31,4 @@ def my_form_post():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	manager.run( port = 5000, host='0.0.0.0' )
+	app.run( port = 5000, host='0.0.0.0' )
