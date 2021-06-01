@@ -12,7 +12,7 @@ class Server(BaseHTTPRequestHandler):
         self._set_headers()
     def do_GET( self ):
         self._set_headers()
-        self.wfile.write( json.dumps( { 'hello': 'world', 'received': 'ok' } ) )
+        self.wfile.write( json.dumps( { 'hello': 'world', 'received': 'ok' } ).encode() )
     def do_POST( self ):
         ctype, pdict = cgi.parse_header( self.headers.getheader( 'content-type' ) )
         if ctype != 'application/json':
