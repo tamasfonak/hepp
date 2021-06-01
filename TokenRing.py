@@ -1,9 +1,12 @@
 from flask import Flask
 from flask import request
+from flask_script import Manager, Server
+
 import _thread
 import token_sending
 
 app = Flask(__name__)
+manager = Manager( app )
 
 token = input( "Do I start with the token? y/n: " )
 if token == "y":
@@ -11,12 +14,18 @@ if token == "y":
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
-@app.before_first_request
 def activate_job():
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	else:
 		pass
+class CustomServer(Server):
+    def __call__(self, app, *args, **kwargs):
+        activate_job()
+        #Hint: Here you could manipulate app
+        return Server.__call__(self, app, *args, **kwargs)
+
+manager.add_command( 'runserver', CustomServer() )
 	
 @app.route( '/', methods=['POST'] )
 def my_form_post():
@@ -31,4 +40,4 @@ def my_form_post():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
-	app.run( port = 5000, host='0.0.0.0' )
+	manager.run( port = 5000, host='0.0.0.0' )
