@@ -3,7 +3,31 @@ import json
 import cgi
 import time
 
-class Server(BaseHTTPRequestHandler):
+class CallbackHTTPServer( HTTPServer ):
+    def server_activate( self ):
+        self.RequestHandlerClass.pre_start()
+        HTTPServer.server_activate( self )
+        self.RequestHandlerClass.post_start()
+
+    def server_close( self ):
+        self.RequestHandlerClass.pre_stop()
+        HTTPServer.server_close( self )
+        self.RequestHandlerClass.post_stop()
+
+class HttpHandler( BaseHTTPRequestHandler ):
+    @classmethod
+    def pre_start(cls):
+        print ('Before calling socket.listen()')
+    @classmethod
+    def post_start(cls):
+        print ('After calling socket.listen()')
+    @classmethod
+    def pre_stop(cls):
+        print ('Before calling socket.close()')
+    @classmethod
+    def post_stop(cls):
+        print ('After calling socket.close()')
+        
     def _set_headers( self ):
         self.send_response( 200 )
         self.send_header( 'Content-type', 'application/json' )
@@ -25,8 +49,7 @@ class Server(BaseHTTPRequestHandler):
         self._set_headers()
         self.wfile.write( json.dumps( message ).encode() )
         
-def run( server_class=HTTPServer, handler_class=Server, port=5000 ):
-    server_address = ( '', port )
-    httpd = server_class( server_address, handler_class ) 
-    print ( 'Starting httpd on port: ',  port )
+def run():
+    httpd = CallbackHTTPServer( ( '', 5000 ), Server ) 
+    print ( 'Starting httpd on port: 5000')
     httpd.serve_forever()
