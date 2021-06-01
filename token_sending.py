@@ -37,5 +37,6 @@ def send_token():
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
+		print( 'token = 0' )
 		params[ 'token' ] = 0
 	return True
