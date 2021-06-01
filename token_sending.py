@@ -3,7 +3,7 @@ import urllib
 import multicast
 import random
 
-params = { token: 1 }
+params = { 'token': 1 }
 headers = { 
 	'Content-type': 'application/x-www-form-urlencoded', 
 	'Accept': 'text/plain' 
