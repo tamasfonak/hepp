@@ -6,6 +6,8 @@ import time
 import multicast
 import random
 
+params = { 'token': 1 }
+
 class CallbackHTTPServer( HTTPServer ):
     def server_activate( self ):
         self.RequestHandlerClass.pre_start()
@@ -58,10 +60,7 @@ def listen():
     print ( 'Starting httpd on port: 5000')
     httpd.serve_forever()
 
-    
 
-
-params = { 'token': 1 }
 headers = { 
 	'Content-type': 'application/json', 
 	'Accept': 'text/plain' 
