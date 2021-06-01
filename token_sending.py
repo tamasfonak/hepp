@@ -31,7 +31,7 @@ def connect():
 		response = connection.getresponse()
 		return True
 	except multicast.socket.error:
-		sleep( 3 )
+		time.sleep( 3 )
 		return connect()
 
 def send_token():
