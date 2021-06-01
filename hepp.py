@@ -33,5 +33,3 @@ tokening.token = compute_token
 _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
-if ( tokening.params[ 'token' ] == 1 ):
-	tokening.send_token()
