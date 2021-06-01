@@ -53,8 +53,9 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
-		params[ 'token' ] = 1
 		print( "params", params )
+		#params[ 'token' ] = 1
+		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
 		time.sleep( 3 )
