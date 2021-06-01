@@ -19,6 +19,7 @@ def my_form_post():
 		token_sending.params[ 'token' ] = 1
 		token_sending.params[ 'starting' ] = int( request.form[ 'starting' ] )
 		token_sending.params[ 'total' ] = int( request.form[ 'total' ] )
+		print( text )
 	_thread.start_new_thread( token_sending.send_token, () )
 	return True
 
