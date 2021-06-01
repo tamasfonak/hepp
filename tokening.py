@@ -9,6 +9,11 @@ import random
 
 params = { 'token': 1 }
 
+def compute_token( params ):
+	print( "Hasn't been defined!" )
+
+set_token = compute_token
+
 class CallbackHTTPServer( HTTPServer ):
 	def server_activate( self ):
 		self.RequestHandlerClass.pre_start()
@@ -53,7 +58,8 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
-		print( "params", params )
+		if params[ 'token' ] == 1:
+			set_token( params )
 		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
@@ -70,11 +76,6 @@ headers = {
 	'Content-type': 'application/json', 
 	'Accept': 'text/plain' 
 }
-
-def compute_token( params ):
-	print( "Hasn't been defined!" )
-
-set_token = compute_token
 
 def connect():
 	while len( multicast.ips ) < 1:
