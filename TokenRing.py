@@ -23,11 +23,10 @@ def my_form_post():
 	return True
 
 def start():
-	app.run( port = 5000, host='0.0.0.0' )
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	else:
 		pass
-	#app.run( port = 5000, host='0.0.0.0' ) # Ezt elrakom ...
+	app.run( port = 5000, host='0.0.0.0' ) # Ezt elrakom ...
