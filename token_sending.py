@@ -16,7 +16,7 @@ token = compute_token
 
 def set_token():
 	val = token( params )
-	print( val )
+	print( 'set_token: ', val )
 	#params[ 'token' ] = val[ 0 ]
 
 def connect():
