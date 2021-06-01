@@ -52,10 +52,10 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			self.end_headers()
 			return
 		length = int( self.headers.get( 'content-length' ) )
-		message = json.loads( self.rfile.read( length ) )
-		message[ 'token' ] = 1
+		params = json.loads( self.rfile.read( length ) )
+		params[ 'token' ] = 1
 		self._set_headers()
-		self.wfile.write( json.dumps( message ).encode() )
+		self.wfile.write( json.dumps( params ).encode() )
 		time.sleep( 3 )
 		_thread.start_new_thread( send_token, () )
         
