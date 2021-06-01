@@ -3,30 +3,25 @@ import urllib
 import multicast
 import random
 
-params = { 
-	'token': 0,
-	'distance': 0,
-	'starting': 0, 
-	'total': 0,
-}
+params = { token: 1 }
 headers = { 
 	'Content-type': 'application/x-www-form-urlencoded', 
 	'Accept': 'text/plain' 
 }
 
-def compute_token( starting = 0, total = 0 ):
+def compute_token( params ):
 	print( "Hasn't been defined!" )
 
 token = compute_token
 
 def set_token():
-	val = videos( params[ 'starting' ], params[ 'total' ] )
+	val = token( params )
 	params[ 'starting' ] = val[ 0 ]
 	params[ 'total' ] = val[ 1 ]
 
 def connect():
 	while len( multicast.ips ) < 1:
-		pass
+		pass # Ez a ciklus fut mi'g nincs ma'sik ge'pa a ha'lo'zaton. (Ha a saja't IP-t kiza'rom)
 	try:
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
