@@ -19,4 +19,4 @@ def compute_token( params ):
 
 TokenRing.token_sending.videos = compute_token
 TokenRing.start()
-app.run( port = 5000, host='0.0.0.0' )
+TokenRing.app.run( port = 5000, host='0.0.0.0' )
