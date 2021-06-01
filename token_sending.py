@@ -14,12 +14,12 @@ headers = {
 	'Accept': 'text/plain' 
 }
 
-def compute_videos( starting = 0, total = 0 ):
+def compute_token( starting = 0, total = 0 ):
 	print( "Hasn't been defined!" )
 
-videos= compute_videos
+token = compute_token
 
-def set_videos():
+def set_token():
 	val = videos( params[ 'starting' ], params[ 'total' ] )
 	params[ 'starting' ] = val[ 0 ]
 	params[ 'total' ] = val[ 1 ]
@@ -38,7 +38,7 @@ def connect():
 		return connect()
 
 def send_token():
-	set_videos()
+	set_token()
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
