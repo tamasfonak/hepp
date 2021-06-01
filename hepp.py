@@ -17,5 +17,5 @@ def compute_token( params ):
 	# measure.distance()
 	return ( params )
 
-TokenRing.token_sending.videos = compute_videos
+TokenRing.token_sending.videos = compute_token
 TokenRing.start()
