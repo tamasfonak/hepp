@@ -13,9 +13,9 @@ loop = OMXPlayer( videos[ 'floorLoop' ], args=['--loop'], dbus_name='org.mpris.M
 hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
 hepp.pause()
 
-def compute_token( starting = 0, total = 0 ):
+def compute_token( params ):
 	# measure.distance()
-	return ( starting, total )
+	return ( params )
 
 TokenRing.token_sending.videos = compute_videos
 TokenRing.start()
