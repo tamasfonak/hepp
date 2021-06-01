@@ -42,6 +42,7 @@ def receive():
 		try:
 			data, addr = sock.recvfrom( 1024 )
 			#if data.decode() != host: # Saja't IP-k kiza'rom?
+			lock.acquire()
 			ips[ data.decode() ] = time.time()
 			lock.release()
 		except socket.error:
