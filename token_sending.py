@@ -26,8 +26,7 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
-		print( "Connection: ", connection )
-		#connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
+		connection.request( "POST", "/", urllib.parse.urlencode( params ), headers )
 		#response = connection.getresponse()
 		return True
 	except multicast.socket.error:
