@@ -27,7 +27,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 	@classmethod
 	def post_start(cls):
 		if ( params[ 'token' ] == 1 ):
-			send_token()
+			_thread.start_new_thread( send_token, () )
 	@classmethod
 	def pre_stop(cls):
 		print ('Before calling socket.close()')
