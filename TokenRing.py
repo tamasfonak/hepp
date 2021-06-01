@@ -1,7 +1,8 @@
-from flask import Flask
-from flask import request
+#from flask import Flask
+#from flask import request
 
 import _thread
+import token_listening
 import token_sending
 
 token = input( "Do I start with the token? y/n: " )
@@ -10,9 +11,9 @@ if token == "y":
 elif token == "n":
 	token_sending.params[ 'token' ] == 0
 
-app = Flask( __name__ )
+#app = Flask( __name__ )
 	
-@app.route( '/', methods=[ 'POST' ] )
+#@app.route( '/', methods=[ 'POST' ] )
 def main_route():
 	text = request.form[ 'token' ]
 	if ( text == '1' ):
@@ -25,6 +26,8 @@ def main_route():
 def start():
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
+	_thread.start_new_thread( token_listening.run, () )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
-	app.run( port = 5000, host='0.0.0.0' )
+	#app.run( port = 5000, host='0.0.0.0' )
+	
