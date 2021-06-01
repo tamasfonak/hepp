@@ -3,10 +3,10 @@ from omxplayer.player import OMXPlayer
 from pathlib import Path
 #import Measure
 videos = {
-	'floorLoop': Path( './ures.mp4' ),
-	'tableComesIn': Path( './tabla_jon.mp4' ),
-	'tableLoop': Path( './ures_tabla.mp4' ),
-	'tableGoesOut': Path( './tabla_ki.mp4' )
+	'floorLoop': Path( '/home/pi/hepp_videos/ures.mp4' ),
+	'tableComesIn': Path( '/home/pi/hepp_videos/tabla_jon.mp4' ),
+	'tableLoop': Path( '/home/pi/hepp_videos/ures_tabla.mp4' ),
+	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
 loop = OMXPlayer( videos[ 'floorLoop' ], dbus_name='org.mpris.MediaPlayer2.loop' )
