@@ -17,17 +17,17 @@ def my_form_post():
 	text = request.form[ 'token' ]
 	if ( text == '1' ):
 		token_sending.params[ 'token' ] = 1
-		token_sending.params[ 'starting' ] = int( request.form[ 'starting' ] )
+		token_sending.params[ 'distance' ] = request.form[ 'distance' ] )
 		token_sending.params[ 'total' ] = int( request.form[ 'total' ] )
-		print( text )
 	_thread.start_new_thread( token_sending.send_token, () )
 	return True
 
 def start():
+	app.run( port = 5000, host='0.0.0.0' )
 	_thread.start_new_thread( token_sending.multicast.receive, () )
 	_thread.start_new_thread( token_sending.multicast.send, () )
 	if ( token_sending.params[ 'token' ] == 1 ):
 		token_sending.send_token()
 	else:
 		pass
-	app.run( port = 5000, host='0.0.0.0' )
+	#app.run( port = 5000, host='0.0.0.0' ) # Ezt elrakom ...
