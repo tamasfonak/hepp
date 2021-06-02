@@ -12,7 +12,7 @@ videos = {
 	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
-loop = OMXPlayer( videos[ 'floorLoop' ], args=[ '--loop' ], dbus_name='org.mpris.MediaPlayer2.loop' )
+loop = OMXPlayer( videos[ 'tableComesIn' ], args=[ '--loop' ], dbus_name='org.mpris.MediaPlayer2.loop' )
 
 def compute_video():
 	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
