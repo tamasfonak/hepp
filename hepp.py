@@ -24,8 +24,6 @@ def compute_video():
 	hepp.play_sync()
 	loop.play()
 	
-	hepp.stop()
-	
 	tokening.time.sleep( 3 )
 	tokening.params[ 'token' ] = 1
 	return True
