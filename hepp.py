@@ -14,6 +14,7 @@ videos = {
 
 loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 hepp = False
+isHepp = False
 
 def compute_video():
 	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp', pause = True )
@@ -21,14 +22,15 @@ def compute_video():
 	print( hepp )
 	
 	loop.pause()
-	#hepp.play_sync()
+	isHepp = True;
+	hepp.play_sync()
+	isHepp = False;
 	loop.play()
 	
-	tokening.time.sleep( 3 )
 	return True
 	
 def compute_token( params ):
-	if params[ 'token' ] == 1:
+	if params[ 'token' ] == 1 and isHepp == False:
 		_thread.start_new_thread( compute_video, () )
 	return ( params )
 
