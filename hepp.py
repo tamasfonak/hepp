@@ -13,7 +13,7 @@ videos = {
 }
 
 loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
-hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name = 'org.mpris.MediaPlayer2.hepp', pause = True )
+hepp = False
 
 def compute_video():
 	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp', pause = True )
