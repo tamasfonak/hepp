@@ -79,6 +79,7 @@ def connect():
 		pass # Ez a ciklus fut mi'g nincs ma'sik ge'pa a ha'lo'zaton. (Ha a saja't IP-t kiza'rom)
 	try:
 		multicast.lock.acquire()
+		print( 'Connection: ', random.choice( list( multicast.ips.keys() ) ) )
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
 		connection.request( "POST", "/", json.dumps( params ), headers )
