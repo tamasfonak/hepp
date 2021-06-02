@@ -61,7 +61,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
-		time.sleep( 0.3 )
+		time.sleep( 0.5 )
 		_thread.start_new_thread( send_token, () )
         
 def listen():
@@ -81,6 +81,7 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
+		print( 'connections: ', params )
 		connection.request( "POST", "/", json.dumps( params ), headers )
 		response = connection.getresponse()
 		return True
