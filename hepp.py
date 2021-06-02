@@ -27,6 +27,8 @@ def compute_video():
 	isHepp = False;
 	loop.play()
 	
+	tokening.params[ 'token' ] = 1
+	
 	return True
 	
 def compute_token( params ):
