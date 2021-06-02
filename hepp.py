@@ -17,7 +17,8 @@ hepp = False
 isHepp = False
 
 def compute_video():
-	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp', pause = True )
+	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
+	hepp.pause()
 
 	print( hepp )
 	
