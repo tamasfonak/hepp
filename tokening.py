@@ -62,7 +62,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			print( 'Received: ', params )
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
-		time.sleep( 0.5 )
+		#time.sleep( 0.5 )
 		_thread.start_new_thread( send_token, () )
         
 def listen():
