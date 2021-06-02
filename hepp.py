@@ -19,7 +19,7 @@ def compute_video():
 	hepp = OMXPlayer( videos[ 'tableComesIn' ], args=[ '--layer', '2' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
 	hepp.pause()
 
-	print( 'hepp' )
+	print( hepp )
 	
 	#loop.pause()
 	hepp.play_sync()
