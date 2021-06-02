@@ -61,8 +61,8 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
-		if params[ 'token' ] == 1:
-			_thread.start_new_thread( send_token, () )
+		time.sleep( 0.5 )
+		_thread.start_new_thread( send_token, () )
         
 def listen():
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
