@@ -13,14 +13,12 @@ MCAST_PORT = 5007
 
 def alive():
 	while True:
-		lock.acquire()
 		for ip in ips.keys():
-			#lock.acquire()
+			lock.acquire()
 			if ( time.time() - ips[ ip ] ) > 5:
 				ips.pop( ip )
-			#lock.release()
-		lock.release()
-		time.sleep( 5 )
+			lock.release()
+		time.sleep( 1 )
 
 def receive():
 	_thread.start_new_thread( alive, () )
