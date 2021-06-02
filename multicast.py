@@ -13,11 +13,13 @@ MCAST_PORT = 5007
 
 def alive():
 	while True:
+		lock.acquire()
 		for ip in ips.keys():
-			lock.acquire()
+			#lock.acquire()
 			if ( time.time() - ips[ ip ] ) > 5:
 				ips.pop( ip )
-			lock.release()
+			#lock.release()
+		lock.release()
 		time.sleep( 5 )
 
 def receive():
