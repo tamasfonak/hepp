@@ -22,7 +22,7 @@ def compute_video():
 	print( hepp )
 	
 	#loop.pause()
-	hepp.play_sync()
+	hepp.play()
 	#loop.play()
 	
 	#tokening.time.sleep( 3 )
