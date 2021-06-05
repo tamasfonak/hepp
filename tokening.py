@@ -44,6 +44,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 	def _set_headers( self ):
 		self.send_response( 200 )
 		self.send_header( 'Content-type', 'application/json' )
+		self.send_header( 'Accept', 'text/plain' )
 		self.end_headers()
 	def do_HEAD( self ):
 		self._set_headers()
@@ -81,7 +82,7 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
-		connection.request( "POST", "/", json.dumps( params ), { 'Content-type': 'application/json' } )
+		connection.request( "POST", "/", json.dumps( params ), headers )
 		response = connection.getresponse()
 		return True
 	except multicast.socket.error:
