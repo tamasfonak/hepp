@@ -28,8 +28,10 @@ def compute_video():
 
 	print( hepp )
 	
+	#loop.pause()
+	#_thread.start_new_thread( loopLoad, ( videos[ 'tableLoop' ], ) )
+	loop.load( videos[ 'tableLoop' ] )
 	loop.pause()
-	_thread.start_new_thread( loopLoad, ( videos[ 'tableLoop' ], ) )
 	isHepp = True;
 	hepp.play_sync()
 	isHepp = False;
