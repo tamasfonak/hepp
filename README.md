@@ -1,9 +1,3 @@
-Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
-```
-cd ./hepp/Autohotspot
-chmod 0775 ./autohotspot-setup.sh
-sudo ./autohotspot-setup.sh
-```
 Log2Ram from [here](https://github.com/azlux/log2ram)
 ```
 echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list
@@ -18,6 +12,11 @@ sudo apt install omxplayer python3-pip git
 sudo pip3 install omxplayer-wrapper
 git clone https://github.com/tamasfonak/hepp
 cd ./hepp
-chmod 0775 ./*
-python3 ./hepp.py
+python3 hepp.py
+```
+Autohotspot from [here](https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer)
+```
+cd ./hepp/Autohotspot
+chmod 0775 ./autohotspot-setup.sh
+sudo ./autohotspot-setup.sh
 ```
