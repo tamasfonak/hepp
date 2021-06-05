@@ -12,9 +12,15 @@ videos = {
 	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
-loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
+floorLoop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.floorLoop' )
+
 hepp = False
 isHepp = False
+
+def loopLoad( loopPath ):
+	loop.load( loopPath )
+	loop.pause()
+	return True
 
 def compute_video():
 	hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
@@ -23,6 +29,7 @@ def compute_video():
 	print( hepp )
 	
 	loop.pause()
+	_thread.start_new_thread( loopLoad, ( videos[ 'tableLoop' ] ) )
 	isHepp = True;
 	hepp.play_sync()
 	isHepp = False;
