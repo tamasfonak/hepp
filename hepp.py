@@ -14,31 +14,24 @@ videos = {
 	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
-loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
-hepp = OMXPlayer( videos[ 'tableComesIn' ], dbus_name='org.mpris.MediaPlayer2.hepp', pause = False )
-hepp = False
+loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--no-osd', '--loop', '--layer', '0' ], dbus_name = 'org.mpris.MediaPlayer2.loop', pause = True )
+hepp = OMXPlayer( videos[ 'tableComesIn' ], args = [ '--no-osd', '--layer', '1' ], dbus_name='org.mpris.MediaPlayer2.hepp', pause = True )
+
 isHepp = False
 
-def loopLoad( loopPath ):
-	loop.load( loopPath )
-	loop.pause()
-	return True
-
 def compute_video():
-	hepp.play()
-
-        loop.load( videos[ 'tableLoop' ] )
-
-        loop.pause()
+        loop.play()
+        tokening.time.sleep( 1 )
+        hepp.play()
+        loop.load( videos[ 'tableLoop' ], pause = True )
         isHepp = True;
-        while hepp.duration() > hepp.position() + 1:
-                pass
+        while hepp.duration() > hepp.position() + 0.5:
+                pass #print( hepp.position() )
+        loop.play()
+        hepp.hide_video() # nem mukodik...
         hepp.pause()
         isHepp = False;
-        loop.play()
-
         tokening.params[ 'token' ] = 1
-
         return True
 	
 def compute_token( params ):
