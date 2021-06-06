@@ -1,9 +1,11 @@
-
+import logging
 from omxplayer.player import OMXPlayer
 from pathlib import Path
 import _thread
 import tokening
 #import Measure
+
+logging.basicConfig( level = logging.DEBUG )
 
 videos = {
 	'floorLoop': Path( '/home/pi/hepp_videos/ures.mp4' ),
@@ -12,7 +14,7 @@ videos = {
 	'tableGoesOut': Path( '/home/pi/hepp_videos/tabla_ki.mp4' )
 }
 
-loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.floorLoop' )
+loop = OMXPlayer( videos[ 'floorLoop' ], args = [ '--loop' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 hepp = False
 isHepp = False
