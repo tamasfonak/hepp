@@ -33,7 +33,7 @@ def play_hepp( heppFile, loopFile = False ):
 
 def compute_token( params ):
         if params[ 'token' ] == 1 and isHepp == False:
-                #play_hepp()
+                pass #play_hepp()
         return ( params )
 
 tokening.set_token = compute_token
