@@ -3,7 +3,7 @@ from omxplayer.player import OMXPlayer
 from pathlib import Path
 import _thread
 import tokening
-#import Measure
+#import distance
 
 logging.basicConfig( level = logging.INFO )
 
