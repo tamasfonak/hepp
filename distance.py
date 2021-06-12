@@ -3,7 +3,7 @@ import time
 
 GPIO.setwarnings( False )
 GPIO.setmode( GPIO.BCM )
-GPIO_TRIGGER = 18
+GPIO_TRIGGER = 17
 GPIO_ECHO = 4
 GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
