@@ -8,7 +8,7 @@ GPIO_ECHO = 4
 GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
  
-def distance():
+def measure():
 	GPIO.output( GPIO_TRIGGER, True )
 	time.sleep( 0.00001 )
 	GPIO.output( GPIO_TRIGGER, False )
@@ -21,8 +21,4 @@ def distance():
 	# time difference between start and arrival
 	# multiply with the sonic speed ( 34300 cm/s )
 	# and divide by 2, because there and back
-	return ( ( StopTime - StartTime ) * 34300 ) / 2
-
-while True:
-	print( distance() )
-	time.sleep( 1 )
+	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
