@@ -50,10 +50,11 @@ def receive():
 
 def send():
 	host = get_ip.get_lan_ip()
-	print( 'send from: ', host )
+	
 	sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 
 	while True:
+		print( 'send from: ', host )
 		sock.sendto( host.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		time.sleep( 3 )
