@@ -33,7 +33,7 @@ def play_hepp( heppFile, loopFile = False ):
 
 def compute_token( params ):
         if params[ 'token' ] == 1 and isHepp == False:
-                pass #play_hepp()
+                print( params )
         return ( params )
 
 tokening.set_token = compute_token
@@ -42,8 +42,6 @@ _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
 
-
-loop.pause()
 #tokening.time.sleep( 3 )
 
 #play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
@@ -53,5 +51,4 @@ loop.pause()
 #play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 
 while True:
-        print( distance.measure() )
         tokening.time.sleep( 1 )
