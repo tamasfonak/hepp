@@ -67,9 +67,9 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			_thread.start_new_thread( send_token, () )
         
 def listen():
-	host = multicast.get_ip.get_lan_ip()
+	#host = multicast.get_ip.get_lan_ip()
 	multicast.lock.acquire()
-	httpd = CallbackHTTPServer( ( host, 5000 ), HttpHandler ) 
+	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000')
 	multicast.lock.release()
 	httpd.serve_forever()
