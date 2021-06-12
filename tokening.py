@@ -87,6 +87,7 @@ def connect():
 		multicast.lock.release()
 		connection.request( "POST", "/", json.dumps( params ), headers )
 		response = connection.getresponse()
+		print( response )
 		return True
 	except multicast.socket.error:
 		return connect()
