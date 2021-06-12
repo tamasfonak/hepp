@@ -16,10 +16,7 @@ videos = {
 
 loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
-isHepp = False
-
 def play_hepp( heppFile, loopFile = False ):
-        isHepp = True
         hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
         while hepp.position() < 1:
                 pass
@@ -28,12 +25,11 @@ def play_hepp( heppFile, loopFile = False ):
         while hepp.duration() > hepp.position() + 1:
                 pass
         tokening.params[ 'token' ] = 1
-        isHepp = False
         return True
 
 def compute_token( params ):
-        if params[ 'token' ] == 1 and isHepp == False:
-                print( params )
+        print( params )
+        params[ 'token' ] = 1
         return ( params )
 
 tokening.set_token = compute_token
