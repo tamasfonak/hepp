@@ -29,6 +29,7 @@ def play_hepp( heppFile, loopFile = False ):
 
 def compute_token( params ):
         print( params )
+        tokening.time.sleep( 1 )
         params[ 'token' ] = 1
         return ( params )
 
