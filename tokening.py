@@ -87,7 +87,13 @@ def connect():
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
 		connection.request( "POST", "/", json.dumps( params ), headers )
+		
 		response = connection.getresponse()
+		
+		print( response.read().decode() )
+
+        	connection.close()
+		
 		return True
 	except multicast.socket.error:
 		return connect()
