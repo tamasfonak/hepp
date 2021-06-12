@@ -88,12 +88,12 @@ def connect():
 		multicast.lock.release()
 		connection.request( "POST", "/", json.dumps( params ), headers )
 		response = connection.getresponse()
-		print( response )
 		return True
 	except multicast.socket.error:
 		return connect()
 
 def send_token():
+	#set_token()
 	if connect() == False:
 		print( "Something went wrong" )
 	else:
