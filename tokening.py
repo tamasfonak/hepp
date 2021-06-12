@@ -66,7 +66,8 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		_thread.start_new_thread( send_token, () )
         
 def listen():
-	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
+	host = multicast.get_ip.get_lan_ip()
+	httpd = CallbackHTTPServer( ( host, 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000')
 	httpd.serve_forever()
 
@@ -76,7 +77,6 @@ headers = {
 }
 
 def connect():
-	print( 'multicast.ips', multicast.ips )
 	while len( multicast.ips ) < 1:
 		time.sleep( 1 ) # Ez a ciklus fut mi'g nincs ma'sik ge'pa a ha'lo'zaton. (Ha a saja't IP-t kiza'rom)
 	try:
