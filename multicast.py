@@ -43,7 +43,7 @@ def receive():
 			data, addr = sock.recvfrom( 1024 )
 			if data.decode() != host: # Saja't IP-k kiza'rom?
 				lock.acquire()
-				print( 'receive: ', data  )
+				print( 'receive: ', ips  )
 				ips[ data.decode() ] = time.time()
 				lock.release()
 		except socket.error:
