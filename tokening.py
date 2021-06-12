@@ -60,8 +60,8 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
 		print( params )
-		self._set_headers()
-		self.wfile.write( json.dumps( params ).encode() )
+		#self._set_headers()
+		#self.wfile.write( json.dumps( params ).encode() )
 		if params[ 'token' ] == 1:
 			set_token( params )
 			_thread.start_new_thread( send_token, () )
