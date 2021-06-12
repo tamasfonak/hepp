@@ -64,6 +64,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		self.wfile.write( json.dumps( params ).encode() )
 		if params[ 'token' ] == 1:
 			set_token( params )
+		time.sleep( 1 )
 		_thread.start_new_thread( send_token, () )
         
 def listen():
