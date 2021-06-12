@@ -53,6 +53,7 @@ def send():
 	host = get_ip.get_lan_ip()
 	
 	sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP )
+	print( socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 
 	while True:
