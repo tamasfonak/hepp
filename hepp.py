@@ -3,7 +3,7 @@ from omxplayer.player import OMXPlayer
 from pathlib import Path
 import _thread
 import tokening
-#import distance
+import distance
 
 logging.basicConfig( level = logging.INFO )
 
@@ -42,13 +42,14 @@ _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
 
-tokening.time.sleep( 3 )
+#tokening.time.sleep( 3 )
 
-play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
+#play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
 
-tokening.time.sleep( 3 )
+#tokening.time.sleep( 3 )
 
-play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
+#play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 
 while True:
+        print( distance )
         tokening.time.sleep( 1 )
