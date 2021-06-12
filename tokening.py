@@ -67,6 +67,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
         
 def listen():
 	host = multicast.get_ip.get_lan_ip()
+	print( 'listen: host:', host )
 	httpd = CallbackHTTPServer( ( host, 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000')
 	httpd.serve_forever()
