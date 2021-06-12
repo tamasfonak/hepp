@@ -90,7 +90,7 @@ def connect():
 		
 		response = connection.getresponse()
 		
-		print( response.read().decode() )
+		print( 'response', response.read().decode() )
 		connection.close()
 		
 		return True
