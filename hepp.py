@@ -51,5 +51,5 @@ _thread.start_new_thread( tokening.listen, () )
 #play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 
 while True:
-        #print( distance() )
+        #print( distance.measure() )
         tokening.time.sleep( 1 )
