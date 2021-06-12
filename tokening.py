@@ -50,7 +50,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		self._set_headers()
 	def do_GET( self ):
 		self._set_headers()
-		self.wfile.write( json.dumps( { 'HEPP': '0.1' } ).encode() )
+		self.wfile.write( json.dumps( params ).encode() )
 	def do_POST( self ):
 		ctype, pdict = cgi.parse_header( self.headers.get( 'content-type' ) )
 		if ctype != 'application/json':
