@@ -42,6 +42,8 @@ _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
 
+
+loop.pause()
 #tokening.time.sleep( 3 )
 
 #play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
@@ -51,5 +53,5 @@ _thread.start_new_thread( tokening.listen, () )
 #play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 
 while True:
-        #print( distance.measure() )
+        print( distance.measure() )
         tokening.time.sleep( 1 )
