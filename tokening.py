@@ -91,8 +91,7 @@ def connect():
 		response = connection.getresponse()
 		
 		print( response.read().decode() )
-
-        	connection.close()
+		connection.close()
 		
 		return True
 	except multicast.socket.error:
