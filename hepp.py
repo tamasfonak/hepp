@@ -51,6 +51,6 @@ _thread.start_new_thread( tokening.listen, () )
 #play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 try:
     while True:
-        time.sleep(1)
+        tokening.time.sleep(1)
 except KeyboardInterrupt:
     print( 'interrupted!' )
