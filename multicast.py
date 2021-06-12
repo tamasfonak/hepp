@@ -18,7 +18,7 @@ def alive():
 			if ( time.time() - ips[ ip ] ) > 5:
 				ips.pop( ip )
 			lock.release()
-		time.sleep( 5 )
+		time.sleep( 1 )
 
 def receive():
 	_thread.start_new_thread( alive, () )
