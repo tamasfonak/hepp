@@ -57,7 +57,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
-		
+		# itt el lehet kapnni meg mielott a valasz megkuldom
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
         
@@ -81,19 +81,17 @@ def connect():
 		multicast.lock.acquire()
 		connection = HTTPConnection( random.choice( list( multicast.ips.keys() ) ), 5000, timeout=10 )
 		multicast.lock.release()
+		
 		connection.request( "POST", "/", json.dumps( params ), headers )
-		
 		response = connection.getresponse()
-		
 		data = json.loads( response.read().decode() )
-		
 		connection.close()
-		print( params, data )
+		
 		if data[ 'token' ] == 0:
 			time.sleep( 1 )
 		else: 
 			set_token( params )
-			
+		
 		return True
 	except multicast.socket.error:
 		return connect()
