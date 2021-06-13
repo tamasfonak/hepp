@@ -88,7 +88,7 @@ def connect():
 		data = json.loads( response.read().decode() )
 		
 		connection.close()
-		
+		print( params, data )
 		if data[ 'token' ] == 0:
 			time.sleep( 1 )
 		else: 
