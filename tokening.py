@@ -27,13 +27,12 @@ class CallbackHTTPServer( HTTPServer ):
 
 class HttpHandler( BaseHTTPRequestHandler ):
 	@classmethod
-	def pre_start(cls):
+	def pre_start( cls ):
 		print ('Before calling socket.listen()')
 
 	@classmethod
-	def post_start(cls):
-		if ( params[ 'token' ] == 1 ):
-			_thread.start_new_thread( send_token, () )
+	def post_start( cls ):
+		send_token()
 	@classmethod
 	def pre_stop(cls):
 		print ('Before calling socket.close()')
@@ -59,12 +58,9 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
-		print( params )
+
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
-		if params[ 'token' ] == 1:
-			set_token( params )
-			_thread.start_new_thread( send_token, () )
         
 def listen():
 	#host = multicast.get_ip.get_lan_ip()
@@ -98,9 +94,5 @@ def connect():
 		return connect()
 
 def send_token():
-	#set_token()
-	if connect() == False:
-		print( "Something went wrong" )
-	else:
+	while connect() != False:
 		params[ 'token' ] = 0
-	return True
