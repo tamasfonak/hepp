@@ -89,7 +89,7 @@ def connect():
 		
 		connection.close()
 		
-		if data[ 'token' ] = 0:
+		if data[ 'token' ] == 0:
 			time.sleep( 1 )
 		else: 
 			set_token( paramms )
