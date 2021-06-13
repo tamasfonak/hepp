@@ -92,7 +92,7 @@ def connect():
 		if data[ 'token' ] == 0:
 			time.sleep( 1 )
 		else: 
-			set_token( paramms )
+			set_token( params )
 			
 		return True
 	except multicast.socket.error:
