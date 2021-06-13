@@ -94,5 +94,5 @@ def connect():
 		return connect()
 
 def send_token():
-	while connect() != False:
+	while connect() == True:
 		params[ 'token' ] = 0
