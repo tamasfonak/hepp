@@ -85,7 +85,7 @@ def connect():
 		
 		response = connection.getresponse()
 		
-		data = response.read().decode()
+		data = json.loads( response.read().decode() )
 		
 		connection.close()
 		
