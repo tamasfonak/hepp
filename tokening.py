@@ -32,7 +32,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 
 	@classmethod
 	def post_start( cls ):
-		send_token()
+		#send_token()
 	@classmethod
 	def pre_stop(cls):
 		print ('Before calling socket.close()')
