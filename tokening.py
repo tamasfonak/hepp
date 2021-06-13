@@ -7,7 +7,7 @@ import _thread
 import multicast
 import random
 
-params = { 'token': 1 }
+params = { 'token': 0 }
 
 def compute_token( params ):
 	print( "Hasn't been defined!" )
