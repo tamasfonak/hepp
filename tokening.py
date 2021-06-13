@@ -29,7 +29,6 @@ class HttpHandler( BaseHTTPRequestHandler ):
 	@classmethod
 	def pre_start( cls ):
 		print ('Before calling socket.listen()')
-
 	@classmethod
 	def post_start( cls ):
 		_thread.start_new_thread( send_token, () )
@@ -58,7 +57,7 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			return
 		length = int( self.headers.get( 'content-length' ) )
 		params = json.loads( self.rfile.read( length ) )
-
+		
 		self._set_headers()
 		self.wfile.write( json.dumps( params ).encode() )
         
@@ -86,15 +85,20 @@ def connect():
 		
 		response = connection.getresponse()
 		
-		print( 'response', response.read().decode() )
+		data = response.read().decode()
+		
 		connection.close()
 		
+		if data[ 'token' ] = 0:
+			time.sleep( 1 )
+		else: 
+			set_token( paramms )
+			
 		return True
 	except multicast.socket.error:
 		return connect()
 
 def send_token():
 	while connect() == True:
-		time.sleep( 1 )
-		params[ 'token' ] = 0
+		pass
 	return True
