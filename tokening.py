@@ -56,16 +56,16 @@ class HttpHandler( BaseHTTPRequestHandler ):
 			self.end_headers()
 			return
 		length = int( self.headers.get( 'content-length' ) )
-		params = json.loads( self.rfile.read( length ) )
+		data = json.loads( self.rfile.read( length ).decode() )
 		# itt el lehet kapnni meg mielott a valasz megkuldom
 		self._set_headers()
-		self.wfile.write( json.dumps( params ).encode() )
+		self.wfile.write( json.dumps( data ).encode() )
         
 def listen():
 	#host = multicast.get_ip.get_lan_ip()
 	multicast.lock.acquire()
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
-	print ( 'Starting httpd on port: 5000')
+	print ( 'Starting httpd on port: 5000' )
 	multicast.lock.release()
 	httpd.serve_forever()
 
