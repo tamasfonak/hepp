@@ -35,9 +35,9 @@ def compute_token( params ):
 
 tokening.set_token = compute_token
 
-_thread.start_new_thread( tokening.multicast.receive, () )
-_thread.start_new_thread( tokening.multicast.send, () )
-_thread.start_new_thread( tokening.listen, () )
+multicastReceive = _thread.start_new_thread( tokening.multicast.receive, () )
+multicastSend = _thread.start_new_thread( tokening.multicast.send, () )
+tikeningListen = _thread.start_new_thread( tokening.listen, () )
 
 #tokening.time.sleep( 3 )
 
@@ -50,4 +50,10 @@ try:
     while True:
         tokening.time.sleep(1)
 except KeyboardInterrupt:
-    print( 'interrupted!' )
+        print( 'interrupted!' )
+        tokeningListen.join()
+        multicastSend.join()
+        multicastReceive.join()
+        print( 'stopped!' )
+        
+        
