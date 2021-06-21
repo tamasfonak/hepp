@@ -28,9 +28,10 @@ class CallbackHTTPServer( HTTPServer ):
 class HttpHandler( BaseHTTPRequestHandler ):
 	@classmethod
 	def pre_start( cls ):
-		print ('Before calling socket.listen()')
+		print ('Before calling socket.listen()' )
 	@classmethod
 	def post_start( cls ):
+		print ('After calling socket.listen()' )
 		_thread.start_new_thread( send_token, () )
 	@classmethod
 	def pre_stop(cls):
@@ -62,13 +63,19 @@ class HttpHandler( BaseHTTPRequestHandler ):
 		self.wfile.write( json.dumps( data ).encode() )
         
 def listen():
-	#host = multicast.get_ip.get_lan_ip()
 	multicast.lock.acquire()
+	
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000' )
+	try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            pass
+        finally:
+            httpd.server_close()
+	
 	multicast.lock.release()
-	httpd.serve_forever()
-
+	
 headers = { 
 	'Content-type': 'application/json', 
 	'Accept': 'text/plain' 
