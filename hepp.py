@@ -29,10 +29,9 @@ videos = {
 	'6': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
 	'5': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
 	'4': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'3': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
-	'2': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
+	'3': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'2': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
 	'1': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
-	
 }
 
 loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
