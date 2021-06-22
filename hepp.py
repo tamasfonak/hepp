@@ -37,7 +37,7 @@ tokening.set_token = compute_token
 
 multicastReceive = _thread.start_new_thread( tokening.multicast.receive, () )
 multicastSend = _thread.start_new_thread( tokening.multicast.send, () )
-tikeningListen = _thread.start_new_thread( tokening.listen, () )
+tokeningListen = _thread.start_new_thread( tokening.listen, () )
 
 #tokening.time.sleep( 3 )
 
