@@ -8,10 +8,10 @@ import distance
 logging.basicConfig( level = logging.INFO )
 
 videos = {
-        'floorLoop': '/home/pi/hepp_videos/ures.mp4',
-        'tableComesIn': '/home/pi/hepp_videos/tabla_jon.mp4',
-        'tableLoop': '/home/pi/hepp_videos/ures_tabla.mp4',
-        'tableGoesOut': '/home/pi/hepp_videos/tabla_ki.mp4'
+        'floorLoop': '/home/pi/hepp_videos/URES_MANEZS.mp4',
+        'tableComesIn': '/home/pi/hepp_videos/01_tabla_BE.mp4',
+        'tableLoop': '/home/pi/hepp_videos/01_tabla_TABLA.mp4',
+        'tableGoesOut': '/home/pi/hepp_videos/01_tabla_OUT.mp4'
 }
 
 loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
@@ -35,25 +35,21 @@ def compute_token( params ):
 
 tokening.set_token = compute_token
 
-multicastReceive = _thread.start_new_thread( tokening.multicast.receive, () )
-multicastSend = _thread.start_new_thread( tokening.multicast.send, () )
-tokeningListen = _thread.start_new_thread( tokening.listen, () )
+_thread.start_new_thread( tokening.multicast.receive, () )
+_thread.start_new_thread( tokening.multicast.send, () )
+_thread.start_new_thread( tokening.listen, () )
 
-#tokening.time.sleep( 3 )
+tokening.time.sleep( 3 )
 
-#play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
+play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
 
-#tokening.time.sleep( 3 )
+tokening.time.sleep( 3 )
 
-#play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
+play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 try:
     while True:
         tokening.time.sleep(1)
 except KeyboardInterrupt:
         print( 'interrupted!' )
-        tokeningListen.exit()
-        multicastSend.exit()
-        multicastReceive.exit()
+        _thread.exit()
         print( 'stopped!' )
-        
-        
