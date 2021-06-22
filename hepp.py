@@ -22,6 +22,8 @@ def play_hepp( heppFile, loopFile = False ):
 		alpha = int( hepp.position() * 255 )
 		if alpha < 255 and alpha > 0:
 			hepp.set_alpha( alpha )
+	while hepp.position() < 1.5:
+		hepp.set_alpha( 255 )
 	if loopFile:
 		loop.load( Path( loopFile ) )
 	while hepp.duration() > hepp.position() + 0.2:
