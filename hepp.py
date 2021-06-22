@@ -22,23 +22,24 @@ videos = {
 	'14': '/home/pi/hepp_videos/HEPP_POCOK_14.mp4',
 	'13': '/home/pi/hepp_videos/HEPP_POCOK_13.mp4',
 	'12': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'11': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'10': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'9': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'8': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'7': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'6': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'5': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'4': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'3': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'2': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'1': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
+	'11': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'10': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'9': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'8': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'7': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'6': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'5': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'4': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'3': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'2': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'1': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4'
 }
 
 loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 def play_hepp( heppFile, loopFile = False ):
 	hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1', '--win', '0,0,1920,1080', '--alpha', '0' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
+	hepp.rate( 2 )
 	while hepp.position() < 1:
 		alpha = int( hepp.position() * 255 )
 		if alpha < 255 and alpha > 0:
