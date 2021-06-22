@@ -51,9 +51,9 @@ try:
         tokening.time.sleep(1)
 except KeyboardInterrupt:
         print( 'interrupted!' )
-        tokeningListen.join()
-        multicastSend.join()
-        multicastReceive.join()
+        tokeningListen.exit()
+        multicastSend.exit()
+        multicastReceive.exit()
         print( 'stopped!' )
         
         
