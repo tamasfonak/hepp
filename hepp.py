@@ -19,7 +19,20 @@ videos = {
 	'17': '/home/pi/hepp_videos/HEPP_POCOK_17.mp4',
 	'16': '/home/pi/hepp_videos/HEPP_POCOK_16.mp4',
 	'15': '/home/pi/hepp_videos/HEPP_POCOK_15.mp4',
-	'14': '/home/pi/hepp_videos/HEPP_POCOK_14.mp4'
+	'14': '/home/pi/hepp_videos/HEPP_POCOK_14.mp4',
+	'12': '/home/pi/hepp_videos/HEPP_POCOK_13.mp4',
+	'11': '/home/pi/hepp_videos/HEPP_POCOK_12.mp4',
+	'10': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
+	'9': '/home/pi/hepp_videos/HEPP_POCOK_10.mp4',
+	'8': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'7': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'6': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'5': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'4': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
+	'3': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
+	'2': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
+	'1': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4'
+	
 }
 
 loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
@@ -58,7 +71,7 @@ _thread.start_new_thread( tokening.listen, () )
 try:
 	while True:
 		tokening.time.sleep( 3 )
-		play_hepp( videos[ str( random.randint( 14, 19 ) ) ] )
+		play_hepp( videos[ str( random.randint( 1, 19 ) ) ] )
 
 except KeyboardInterrupt:
         print( 'interrupted!' )
