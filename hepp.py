@@ -39,7 +39,6 @@ loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', 
 
 def play_hepp( heppFile, loopFile = False ):
 	hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1', '--win', '0,0,1920,1080', '--alpha', '0' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
-	hepp.rate( 2 )
 	while hepp.position() < 1:
 		alpha = int( hepp.position() * 255 )
 		if alpha < 255 and alpha > 0:
