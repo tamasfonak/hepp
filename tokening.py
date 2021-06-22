@@ -68,11 +68,11 @@ def listen():
 	httpd = CallbackHTTPServer( ( '', 5000 ), HttpHandler ) 
 	print ( 'Starting httpd on port: 5000' )
 	try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            pass
-        finally:
-            httpd.server_close()
+		httpd.serve_forever()
+	except KeyboardInterrupt:
+		pass
+	finally:
+		httpd.server_close()
 	
 	multicast.lock.release()
 	
