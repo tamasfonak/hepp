@@ -1,20 +1,26 @@
-import logging
-from omxplayer.player import OMXPlayer
-from pathlib import Path
-import _thread
-import tokening
+import logging 
+from omxplayer.player import OMXPlayer 
+from pathlib import Path 
+import _thread 
+import tokening 
 import distance
 
 logging.basicConfig( level = logging.INFO )
 
+
 videos = {
-        'floorLoop': '/home/pi/hepp_videos/URES_MANEZS.mp4',
+        'floorLoop': '/home/pi/hepp_videos/URES_MANEZS_HOSSZU_CBR_10M.mp4',
         'tableComesIn': '/home/pi/hepp_videos/01_tabla_BE.mp4',
         'tableLoop': '/home/pi/hepp_videos/01_tabla_TABLA.mp4',
-        'tableGoesOut': '/home/pi/hepp_videos/01_tabla_OUT.mp4'
+        'tableGoesOut': '/home/pi/hepp_videos/01_tabla_OUT.mp4',
+	'hepp18': '/home/pi/hepp_videos/HEPP_POCOK_18.mp4',
+	'hepp17': '/home/pi/hepp_videos/HEPP_POCOK_17.mp4',
+	'hepp16': '/home/pi/hepp_videos/HEPP_POCOK_16.mp4',
+	'hepp15': '/home/pi/hepp_videos/HEPP_POCOK_15.mp4',
+	'hepp14': '/home/pi/hepp_videos/HEPP_POCOK_14.mp4'
 }
 
-loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
+loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 def play_hepp( heppFile, loopFile = False ):
 	hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1', '--win', '0,0,1920,1080', '--alpha', '0' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
@@ -26,10 +32,12 @@ def play_hepp( heppFile, loopFile = False ):
 		hepp.set_alpha( 255 )
 	if loopFile:
 		loop.load( Path( loopFile ) )
-	while hepp.duration() > hepp.position() + 0.2:
+	while hepp.duration() > hepp.position() + 0.3:
 		alpha = int( ( hepp.duration() - hepp.position() ) * 255 )
 		if alpha < 255 and alpha > 0:
 			hepp.set_alpha( alpha )
+	hepp.set_alpha( 0 )
+	hepp.quit()
 	tokening.params[ 'token' ] = 1
 	return True
 
@@ -45,16 +53,19 @@ _thread.start_new_thread( tokening.multicast.receive, () )
 _thread.start_new_thread( tokening.multicast.send, () )
 _thread.start_new_thread( tokening.listen, () )
 
-tokening.time.sleep( 3 )
-
-play_hepp( videos[ 'tableComesIn' ], videos[ 'tableLoop' ] )
-
-tokening.time.sleep( 3 )
-
-play_hepp( videos[ 'tableGoesOut' ], videos[ 'floorLoop' ] )
 try:
-    while True:
-        tokening.time.sleep(1)
+	while True:
+		tokening.time.sleep( 3 )
+		play_hepp( videos[ 'hepp18' ] )
+		tokening.time.sleep( 3 )
+		play_hepp( videos[ 'hepp17' ] )
+		tokening.time.sleep( 3 )
+		play_hepp( videos[ 'hepp16' ] )
+		tokening.time.sleep( 3 )
+		play_hepp( videos[ 'hepp15' ] )
+		tokening.time.sleep( 3 )
+		play_hepp( videos[ 'hepp14' ] )
+
 except KeyboardInterrupt:
         print( 'interrupted!' )
         _thread.exit()
