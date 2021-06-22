@@ -14,6 +14,7 @@ videos = {
         'tableComesIn': '/home/pi/hepp_videos/01_tabla_BE.mp4',
         'tableLoop': '/home/pi/hepp_videos/01_tabla_TABLA.mp4',
         'tableGoesOut': '/home/pi/hepp_videos/01_tabla_OUT.mp4',
+	'19': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
 	'18': '/home/pi/hepp_videos/HEPP_POCOK_18.mp4',
 	'17': '/home/pi/hepp_videos/HEPP_POCOK_17.mp4',
 	'16': '/home/pi/hepp_videos/HEPP_POCOK_16.mp4',
@@ -57,7 +58,7 @@ _thread.start_new_thread( tokening.listen, () )
 try:
 	while True:
 		tokening.time.sleep( 3 )
-		play_hepp( videos[ str( random.randint( 14, 18 ) ) ] )
+		play_hepp( videos[ str( random.randint( 14, 19 ) ) ] )
 
 except KeyboardInterrupt:
         print( 'interrupted!' )
