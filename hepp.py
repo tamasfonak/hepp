@@ -81,7 +81,6 @@ _thread.start_new_thread( tokening.listen, () )
 
 try:
 	while True:
-		tokening.time.sleep( 3 )
 		play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
 
 except KeyboardInterrupt:
