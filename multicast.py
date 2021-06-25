@@ -42,7 +42,7 @@ def receive():
 	while True:
 		try:
 			data, ( addr, port ) = sock.recvfrom( 1024 )
-			print( 'recvfrom', data, addr[ 0 ] )
+			print( 'recvfrom', data, addr, port )
 		#if data.decode() != host: # Saja't IP-k kiza'rom?
 			lock.acquire()
 			ips[ data.decode() ] = time.time()
