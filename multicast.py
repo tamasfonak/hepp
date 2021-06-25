@@ -57,5 +57,6 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 
 	while True:
+		print( 'sendto:', host )
 		sock.sendto( host.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		time.sleep( 3 )
