@@ -4,6 +4,7 @@ import time
 import threading
 import _thread
 import get_ip
+import json
 
 ips = {}
 lock = threading.Lock()
@@ -40,7 +41,7 @@ def receive():
 	
 	while True:
 		try:
-			data, addr = sock.recvfrom( 1024 )
+			data, addr, port = sock.recvfrom( 1024 )
 			print( 'recvfrom', data, addr[ 0 ] )
 		#if data.decode() != host: # Saja't IP-k kiza'rom?
 			lock.acquire()
