@@ -7,12 +7,17 @@ import get_ip
 import json
 
 ips = {}
-token = 'waiting'
+status = 'waiting' # processing, passing
 
 lock = threading.Lock()
 
 MCAST_GRP = '224.1.1.1'
 MCAST_PORT = 5007
+
+def call_hepp():
+	status = "processing"
+	print( 'hepp' );
+	time.sleep( 3 )
 
 def alive():
 	while True:
@@ -24,7 +29,7 @@ def alive():
 		time.sleep( 5 )
 
 def receive():
-	_thread.start_new_thread( alive, () )
+	#_thread.start_new_thread( alive, () )
 	
 	host = get_ip.get_lan_ip()
 
@@ -44,10 +49,13 @@ def receive():
 	while True:
 		try:
 			data, ( addr, port ) = sock.recvfrom( 1024 )
-			print( 'recvfrom', data.decode(), addr, port )
-		#if data.decode() != host: # Saja't IP-k kiza'rom?
 			lock.acquire()
-			ips[ addr ] = time.time()
+			ips[ addr ][ 'lastRecvTime' ] = time.time()
+			ips[ addr ][ 'status' ] = status
+			print( ips )
+			for ip in ips.keys():
+				if ( time.time() - ips[ ip ][ 'lastRecvTime' ] ) > 5:
+					ips.pop( ip )
 			lock.release()
 		except socket.error:
       			print( 'socket.error: ', binascii.hexlify( data ) )
@@ -61,5 +69,5 @@ def send():
 
 	while True:
 		#print( 'sendto:', host )
-		sock.sendto( token.encode(), ( MCAST_GRP, MCAST_PORT ) )
+		sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		time.sleep( 1 )
