@@ -45,7 +45,7 @@ def receive():
 			print( 'recvfrom', data, addr, port )
 		#if data.decode() != host: # Saja't IP-k kiza'rom?
 			lock.acquire()
-			ips[ data.decode() ] = time.time()
+			ips[ addr ] = time.time()
 			lock.release()
 		except socket.error:
       			print( 'socket.error: ', binascii.hexlify( data ) )
@@ -60,4 +60,4 @@ def send():
 	while True:
 		print( 'sendto:', host )
 		sock.sendto( host.encode(), ( MCAST_GRP, MCAST_PORT ) )
-		time.sleep( 3 )
+		time.sleep( 1 )
