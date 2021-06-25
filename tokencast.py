@@ -1,6 +1,7 @@
 import socket
 import binascii
 import time
+import json
 import threading
 import _thread
 import get_ip
@@ -41,10 +42,11 @@ def receive():
 	while True:
 		try:
 			data, addr = sock.recvfrom( 1024 )
-			if data.decode() != host: # Saja't IP-k kiza'rom?
-				lock.acquire()
-				ips[ data.decode() ] = time.time()
-				lock.release()
+			print( data, addr )
+		#if data.decode() != host: # Saja't IP-k kiza'rom?
+			lock.acquire()
+			ips[ data.decode() ] = time.time()
+			lock.release()
 		except socket.error:
       			print( 'socket.error: ', binascii.hexlify( data ) )
 
