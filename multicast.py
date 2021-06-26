@@ -80,5 +80,7 @@ def send():
 			_thread.start_new_thread( call_hepp, () )
 
 		sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
-		print( 'Sent: ', now ) 
-		time.sleep( 1 )
+		print( 'Sent: ', now )
+		print( 'Status:', status )
+		print( '------------------------------------' )
+		time.sleep( 3 )
