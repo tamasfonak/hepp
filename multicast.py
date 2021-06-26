@@ -50,6 +50,8 @@ def receive():
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
 			print( 'Received: ', sta.decode(), ' From: ', addr )
+			print( alive )
+			print()
 			now = sta.decode()
 			for ip in alive.keys():
 				if ( time.time() - alive[ ip ] ) > 5:
