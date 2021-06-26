@@ -3,12 +3,87 @@ import random
 from omxplayer.player import OMXPlayer 
 from pathlib import Path 
 import _thread 
-import multicast
 import distance
+import socket
+import time
+import threading
+import get_ip
 
 logging.basicConfig( level = logging.INFO )
 
+MCAST_GRP = '224.1.1.1'
+MCAST_PORT = 5007
 
+lock = threading.Lock()
+
+alive = {}
+status = {}
+now = 'passing'
+hepp = 0
+
+def compute_token():
+	global now, hepp
+	hepp += 1
+	print( "HEPP", hepp )
+	multicast.time.sleep( 5 )
+	now = 'passing'
+	return True
+
+def receive():
+	host = get_ip.get_lan_ip()
+	sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP )
+	try:
+		sock.setsockopt( socket.SOL_SOCKET, socket.SO_REUSEADDR, 1 )
+	except AttributeError as error:
+		print ( 'AttributeError: ', error )
+	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
+	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_LOOP, 1 )
+	sock.bind( ( MCAST_GRP, MCAST_PORT ) )
+	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
+	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
+	while True:
+		global now
+		try:
+			sta, ( addr, port ) = sock.recvfrom( 1024 )
+			lock.acquire()
+			if addr != host:
+				alive[ addr ] = time.time()
+				status[ addr ] = sta.decode()
+				if sta.decode() == 'passing':
+					now = 'hepp'
+			elif sta.decode() == 'passing':
+				if  not bool( status ):
+					now = 'hepp'
+			try:
+				for ip in alive.keys():
+					if ( time.time() - alive[ ip ] ) > 3:
+						alive.pop( ip )
+						status.pop( ip )
+			except:
+				pass
+			lock.release()
+		except socket.error:
+      			print( 'socket.error!!!')
+
+def send():
+	host = get_ip.get_lan_ip()
+	sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP )
+	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
+	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
+	while True:
+		global now
+		for ip in status.keys():
+			if status[ ip ] == 'processing':
+				now = 'waiting'
+		if now == 'hepp':
+			now = 'processing'
+			_thread.start_new_thread( compute_token, () )
+		try:
+			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
+		except: 
+			print( 'Network error!!!!' )
+		time.sleep( 1 )
+		
 videos = {
         'floorLoop': '/home/pi/hepp_videos/URES_MANEZS_HOSSZU_CBR_10M.mp4',
         'tableComesIn': '/home/pi/hepp_videos/01_tabla_BE.mp4',
@@ -66,21 +141,8 @@ def play_hepp( heppFile, loopFile = False ):
 	tokening.params[ 'token' ] = 1
 	return True
 
-def compute_token():
-	global now, hepp
-	hepp += 1
-	print( "HEPP", hepp )
-	multicast.time.sleep( 5 )
-	now = 'passing'
-	return True
-
-now = 'passing'
-hepp = 0
-multicast.compute_token = compute_token
-multicast.now = now
-
-_thread.start_new_thread(  multicast.receive, () )
-_thread.start_new_thread(  multicast.send, () )
+_thread.start_new_thread(  receive, () )
+_thread.start_new_thread(  send, () )
 
 try:
 	while True:
