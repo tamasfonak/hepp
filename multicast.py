@@ -51,7 +51,8 @@ def receive():
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
 			print( '---------------------')
-			now = sta.decode()
+			if sta.decode() == 'passing'
+				now = passing
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -72,8 +73,6 @@ def send():
 
 	while True:
 		global now
-		if now == 'waiting':
-			now = 'passing'
 		#print( 'Status:', status )
 		print( 'Before send: ', now )
 		for ip in status.keys():
