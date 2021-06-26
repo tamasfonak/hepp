@@ -49,7 +49,7 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
-			print( 'Received: ', sta.decode() )
+			print( 'Received: ', sta.decode(), ' From: ', addr )
 			now = sta.decode()
 			for ip in alive.keys():
 				if ( time.time() - alive[ ip ] ) > 5:
