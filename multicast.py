@@ -72,7 +72,8 @@ def send():
 
 	while True:
 		global now
-		now = 'passing'
+		if now == 'waiting':
+			now = 'passing'
 		print( 'Status:', status )
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
