@@ -74,7 +74,7 @@ def send():
 	while True:
 		global now
 		for ip in status.keys():
-			if now == 'pass' and status[ ip ] == 'processing':
+			if now == 'passing' and status[ ip ] == 'processing':
 				now = 'waiting'
 		if now == 'passing':
 			_thread.start_new_thread( call_hepp, () )
