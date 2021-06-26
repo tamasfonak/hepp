@@ -18,7 +18,7 @@ MCAST_PORT = 5007
 def call_hepp():
 	global now
 	print( 'HEPP' );
-	time.sleep( 10 )
+	time.sleep( 5 )
 	now = 'passing'
 	return True
 
@@ -59,8 +59,9 @@ def receive():
 			#print( '---------------------')
 			try:
 				for ip in alive.keys():
-					if ( time.time() - alive[ ip ] ) > 5:
+					if ( time.time() - alive[ ip ] ) > 3:
 						alive.pop( ip )
+						status.pop( ip )
 			except:
 				pass
 			lock.release()
@@ -89,4 +90,4 @@ def send():
 		#print( 'Sent: ', now )
 		sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		#print( '+++++++++++++++++++++' )
-		time.sleep( 3 )
+		time.sleep( 1 )
