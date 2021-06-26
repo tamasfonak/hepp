@@ -5,6 +5,7 @@ import threading
 import _thread
 import get_ip
 import json
+import screen_color
 
 alive = {}
 status = {}
@@ -18,7 +19,9 @@ MCAST_PORT = 5007
 def call_hepp():
 	global now
 	print( 'HEPP' );
+	screen_color.color( "red" )
 	time.sleep( 5 )
+	screen_color.color( "black" )
 	now = 'passing'
 	return True
 
