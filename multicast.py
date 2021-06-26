@@ -17,8 +17,7 @@ MCAST_PORT = 5007
 
 def call_hepp():
 	global now
-	now = 'processing'
-	print( 'HEPP: ', now );
+	print( 'HEPP' );
 	time.sleep( 5 )
 	now = 'passing'
 	return True
