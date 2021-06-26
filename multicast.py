@@ -57,7 +57,7 @@ def receive():
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
 						alive.pop( ip )
-			exept:
+			except:
 				pass
 			lock.release()
 
