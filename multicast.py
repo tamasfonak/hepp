@@ -48,11 +48,16 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
+				if sta.decode() == 'passing':
+					now = 'passing'
+			else:
+				if sta.decode() == 'passing' and bool( status ):
+					now = 'passing'
+				else: 
+					now = 'waiting'
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
 			print( '---------------------')
-			if sta.decode() == 'passing':
-				now = 'passing'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -81,6 +86,7 @@ def send():
 		if now == 'passing':
 			now = 'processing'
 			_thread.start_new_thread( call_hepp, () )
+			
 		print( 'Sent: ', now )
 		sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		print( '+++++++++++++++++++++' )
