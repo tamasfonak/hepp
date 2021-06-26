@@ -83,7 +83,7 @@ def send():
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( 'Network error!!!!' )
-		time.sleep( 0.1 )
+		time.sleep( 1 )
 		
 videos = {
         'floorLoop': '/home/pi/hepp_videos/URES_MANEZS_HOSSZU_CBR_10M.mp4',
