@@ -51,7 +51,7 @@ def receive():
 				status[ addr ] = sta.decode()
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			print( 'Alive: ', alive )
-			print( '---------------------------------------')
+			print( '---------------------')
 			now = sta.decode()
 			try:
 				for ip in alive.keys():
@@ -73,7 +73,8 @@ def send():
 
 	while True:
 		global now
-		now = 'passing' 
+		now = 'passing'
+		print( 'Status:', status )
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
 				now = 'waiting'
@@ -83,6 +84,5 @@ def send():
 
 		sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		print( 'Sent: ', now )
-		print( 'Status:', status )
-		print( '------------------------------------' )
+		print( '+++++++++++++++++++++' )
 		time.sleep( 3 )
