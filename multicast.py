@@ -50,7 +50,7 @@ def receive():
 				status[ addr ] = sta.decode()
 				if sta.decode() == 'passing':
 					now = 'passing'
-			else:if sta.decode() == 'passing':
+			elif sta.decode() == 'passing':
 				if  not bool( status ):
 					now = 'passing'
 				
