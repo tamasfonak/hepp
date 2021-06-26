@@ -4,21 +4,22 @@ import threading
 import _thread
 import get_ip
 
-alive = {}
-status = {}
-now = 'passing'
-
-lock = threading.Lock()
-
 MCAST_GRP = '224.1.1.1'
 MCAST_PORT = 5007
 
-def back():
+lock = threading.Lock()
+
+alive = {}
+status = {}
+
+default = 'waiting'
+now = default
+
+def back_token():
 	global now
 	print( 'TOKEN' )
 	now = 'passing'
 	return True
-
 compute_token = back_token
 
 def receive():
@@ -78,7 +79,7 @@ def send():
 				now = 'waiting'
 		if now == 'hepp':
 			now = 'processing'
-			_thread.start_new_thread( call_hepp, () )
+			_thread.start_new_thread( compute_token, () )
 		try:
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
