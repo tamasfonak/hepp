@@ -25,7 +25,7 @@ def compute_token():
 	global now, hepp
 	hepp += 1
 	print( "HEPP", hepp )
-	multicast.time.sleep( 5 )
+	time.sleep( 5 )
 	now = 'passing'
 	return True
 
@@ -146,7 +146,7 @@ _thread.start_new_thread(  send, () )
 
 try:
 	while True:
-		multicast.time.sleep( 1 ) #play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+		time.sleep( 1 ) #play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
 
 except KeyboardInterrupt:
         print( 'interrupted!' )
