@@ -8,7 +8,7 @@ import json
 
 alive = {}
 status = {}
-now = 'passing'
+now = 'waiting'
 
 lock = threading.Lock()
 
