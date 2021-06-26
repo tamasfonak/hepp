@@ -54,9 +54,9 @@ def receive():
 				if  not bool( status ):
 					now = 'hepp'
 				
-			print( 'Received: ', sta.decode(), ' From: ', addr )
+			#print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
-			print( '---------------------')
+			#print( '---------------------')
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -78,7 +78,7 @@ def send():
 	while True:
 		global now
 		#print( 'Status:', status )
-		print( 'Before send: ', now )
+		#print( 'Before send: ', now )
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
 				now = 'waiting'
@@ -86,7 +86,7 @@ def send():
 			now = 'processing'
 			_thread.start_new_thread( call_hepp, () )
 			
-		print( 'Sent: ', now )
+		#print( 'Sent: ', now )
 		sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
-		print( '+++++++++++++++++++++' )
+		#print( '+++++++++++++++++++++' )
 		time.sleep( 3 )
