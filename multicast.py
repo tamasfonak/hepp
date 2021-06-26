@@ -51,7 +51,7 @@ def receive():
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
 			print( '---------------------')
-			if sta.decode() == 'passing'
+			if sta.decode() == 'passing':
 				now = passing
 			try:
 				for ip in alive.keys():
