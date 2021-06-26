@@ -52,7 +52,7 @@ def receive():
 			#print( 'Alive: ', alive )
 			print( '---------------------')
 			if sta.decode() == 'passing':
-				now = passing
+				now = 'passing'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
