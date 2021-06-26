@@ -3,7 +3,7 @@ import random
 from omxplayer.player import OMXPlayer 
 from pathlib import Path 
 import _thread 
-import tokening 
+import multicast
 import distance
 
 logging.basicConfig( level = logging.INFO )
@@ -45,7 +45,6 @@ videos = {
 	'2': '/home/pi/hepp_videos/HEPP_POCOK_2.mp4',
 	'1': '/home/pi/hepp_videos/HEPP_POCOK_1.mp4'
 }
-
 #loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 def play_hepp( heppFile, loopFile = False ):
@@ -67,21 +66,23 @@ def play_hepp( heppFile, loopFile = False ):
 	tokening.params[ 'token' ] = 1
 	return True
 
-def compute_token( params ):
-        print( "hepp" )
-        tokening.time.sleep( 1 )
-        params[ 'token' ] = 1
-        return ( params )
+def compute_token():
+        print( "HEPP" )
+        multicast.time.sleep( 5 )
+        now = 'passing'
+        return True
 
-tokening.set_token = compute_token
 
-_thread.start_new_thread( tokening.multicast.receive, () )
-_thread.start_new_thread( tokening.multicast.send, () )
-#_thread.start_new_thread( tokening.listen, () )
+now = 'passing'
+multicast.compute_token = compute_token
+multicast.now = now
+
+_thread.start_new_thread(  multicast.receive, () )
+_thread.start_new_thread(  multicast.send, () )
 
 try:
 	while True:
-		pass #play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+		multicast.time.sleep( 1 ) #play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
 
 except KeyboardInterrupt:
         print( 'interrupted!' )
