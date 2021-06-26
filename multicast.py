@@ -49,10 +49,10 @@ def receive():
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
 				if sta.decode() == 'passing':
-					now = 'passing'
+					now = 'hepp'
 			elif sta.decode() == 'passing':
 				if  not bool( status ):
-					now = 'passing'
+					now = 'hepp'
 				
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
@@ -82,7 +82,7 @@ def send():
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
 				now = 'waiting'
-		if now == 'passing':
+		if now == 'hepp':
 			now = 'processing'
 			_thread.start_new_thread( call_hepp, () )
 			
