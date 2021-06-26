@@ -18,9 +18,7 @@ def call_hepp():
 	global now, hepp
 	hepp += 1
 	print( 'HEPP', hepp );
-	screen_color.color( "red" )
 	time.sleep( 5 )
-	screen_color.color( "black" )
 	now = 'passing'
 	return True
 
