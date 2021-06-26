@@ -25,7 +25,8 @@ def compute_token():
 	global now, hepp
 	hepp += 1
 	print( "HEPP", hepp )
-	play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+	time.sleep( 3 )
+	#play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
 	now = 'passing'
 	return True
 
