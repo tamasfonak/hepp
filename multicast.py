@@ -1,15 +1,13 @@
 import socket
-import binascii
 import time
 import threading
 import _thread
 import get_ip
-import json
-import screen_color
 
 alive = {}
 status = {}
 now = 'passing'
+hepp = 0
 
 lock = threading.Lock()
 
@@ -17,8 +15,9 @@ MCAST_GRP = '224.1.1.1'
 MCAST_PORT = 5007
 
 def call_hepp():
-	global now
-	print( 'HEPP' );
+	global now, hepp
+	hepp += 1
+	print( 'HEPP', hepp );
 	screen_color.color( "red" )
 	time.sleep( 5 )
 	screen_color.color( "black" )
@@ -67,7 +66,7 @@ def receive():
 			lock.release()
 
 		except socket.error:
-      			print( 'socket.error: ', binascii.hexlify( data ) )
+      			print( 'socket.error!!!')
 
 def send():
 	host = get_ip.get_lan_ip()
