@@ -84,4 +84,4 @@ def send():
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( 'Network error!!!!' )
-		time.sleep( 0.2 )
+		time.sleep( 1 )
