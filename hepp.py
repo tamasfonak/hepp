@@ -25,7 +25,7 @@ def compute_token():
 	global now, hepp
 	hepp += 1
 	print( "HEPP", hepp )
-	time.sleep( 5 )
+	play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
 	now = 'passing'
 	return True
 
@@ -138,7 +138,6 @@ def play_hepp( heppFile, loopFile = False ):
 			hepp.set_alpha( alpha )
 	hepp.set_alpha( 0 )
 	hepp.quit()
-	tokening.params[ 'token' ] = 1
 	return True
 
 _thread.start_new_thread(  receive, () )
@@ -146,7 +145,7 @@ _thread.start_new_thread(  send, () )
 
 try:
 	while True:
-		time.sleep( 1 ) #play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+		time.sleep( 1 )
 
 except KeyboardInterrupt:
         print( 'interrupted!' )
