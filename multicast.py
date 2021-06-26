@@ -18,7 +18,7 @@ def call_hepp():
 	global now, hepp
 	hepp += 1
 	print( 'HEPP', hepp );
-	time.sleep( 5 )
+	time.sleep(  3 )
 	now = 'passing'
 	return True
 
@@ -49,7 +49,6 @@ def receive():
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
 				if sta.decode() == 'passing':
-					print( str( status ) )
 					now = 'hepp'
 			elif sta.decode() == 'passing':
 				if  not bool( status ):
@@ -85,4 +84,4 @@ def send():
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( 'Network error!!!!' )
-		time.sleep( 1 )
+		time.sleep( 0.2 )
