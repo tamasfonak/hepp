@@ -50,6 +50,11 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
+				if sta.decode() == 'passing':
+					now = 'hepp'
+			elif sta.decode() == 'passing':
+				if  not bool( status ):
+					now = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
@@ -71,9 +76,7 @@ def send():
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
 				now = 'waiting'
-			elif status[ ip ] == 'passing': 
-				now = 'passing'
-		if now == 'passing':
+		if now == 'hepp':
 			now = 'processing'
 			_thread.start_new_thread( compute_token, () )
 		try:
