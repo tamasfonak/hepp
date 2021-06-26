@@ -44,7 +44,7 @@ def receive():
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 
-			#lock.acquire()
+			lock.acquire()
 
 			if addr != host:
 				alive[ addr ] = time.time()
@@ -55,7 +55,7 @@ def receive():
 				if ( time.time() - alive[ ip ] ) > 5:
 					alive.pop( ip )
 
-			#lock.release()
+			lock.release()
 
 		except socket.error:
       			print( 'socket.error: ', binascii.hexlify( data ) )
