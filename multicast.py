@@ -7,20 +7,19 @@ import get_ip
 alive = {}
 status = {}
 now = 'passing'
-hepp = 0
 
 lock = threading.Lock()
 
 MCAST_GRP = '224.1.1.1'
 MCAST_PORT = 5007
 
-def call_hepp():
-	global now, hepp
-	hepp += 1
-	print( 'HEPP', hepp );
-	time.sleep(  3 )
+def back():
+	global now
+	print( 'TOKEN' )
 	now = 'passing'
 	return True
+
+compute_token = back_token
 
 def receive():
 	host = get_ip.get_lan_ip()
