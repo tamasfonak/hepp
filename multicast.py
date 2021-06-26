@@ -49,6 +49,7 @@ def receive():
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
 				if sta.decode() == 'passing':
+					print( str( status ) )
 					now = 'hepp'
 			elif sta.decode() == 'passing':
 				if  not bool( status ):
