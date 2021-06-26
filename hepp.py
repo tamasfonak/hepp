@@ -69,10 +69,10 @@ def play_hepp( heppFile, loopFile = False ):
 def compute_token():
 	global now, hepp
 	hepp += 1
-        print( "HEPP", hepp )
-        multicast.time.sleep( 5 )
-        now = 'passing'
-        return True
+	print( "HEPP", hepp )
+	multicast.time.sleep( 5 )
+	now = 'passing'
+	return True
 
 now = 'passing'
 hepp = 0
