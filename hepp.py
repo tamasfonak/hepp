@@ -18,7 +18,7 @@ lock = threading.Lock()
 
 alive = {}
 status = {}
-now = 'waiting'
+now = 'passing'
 hepp = 0
 
 def compute_token():
@@ -27,7 +27,7 @@ def compute_token():
 	print( "HEPP", hepp )
 	time.sleep( 3 )
 	#play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
-	now = 'waiting'
+	now = 'passing'
 	return True
 
 def receive():
@@ -50,6 +50,11 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
+				if sta.decode() == 'passing':
+					now = 'hepp'
+			elif sta.decode() == 'passing':
+				if  not bool( status ):
+					now = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
@@ -71,7 +76,7 @@ def send():
 		for ip in status.keys():
 			if status[ ip ] == 'processing':
 				now = 'waiting'
-		if now != 'processing' and now != 'waiting':
+		if now == 'hepp':
 			now = 'processing'
 			_thread.start_new_thread( compute_token, () )
 		try:
