@@ -50,11 +50,10 @@ def receive():
 				status[ addr ] = sta.decode()
 				if sta.decode() == 'passing':
 					now = 'passing'
-			else:
-				if sta.decode() == 'passing' and bool( status ):
+			else:if sta.decode() == 'passing':
+				if  not bool( status ):
 					now = 'passing'
-				else: 
-					now = 'waiting'
+				
 			print( 'Received: ', sta.decode(), ' From: ', addr )
 			#print( 'Alive: ', alive )
 			print( '---------------------')
