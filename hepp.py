@@ -78,11 +78,9 @@ def send():
 	while True:
 		global now
 		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
-			now = 'passing' # elveszett a token mindenki 'waiting'
-		if now != 'processing':
-			for ip in status.keys():
-				if status[ ip ] == 'processing':
-					now = 'waiting'
+			now = 'hepp' # elveszett a token mert mindenki 'waiting'
+		if now != 'processing' and 'processing' in status.values():
+			now = 'waiting' # valaki dolgozik meg 'waiting'
 		if now == 'hepp':
 			now = 'processing'
 			try:
