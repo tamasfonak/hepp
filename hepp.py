@@ -148,7 +148,8 @@ def play_hepp( heppFile, loopFile = False ):
 	hepp.quit()
 	return True
 
-_thread.start_new_thread(  receive, () )
+_thread.start_new_thread(  receive, () ) # elkezdunk hallgatozni
+time.slee( 1 ) # varunk egy kicsit mielott beleszolunk
 _thread.start_new_thread(  send, () )
 
 try:
