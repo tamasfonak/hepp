@@ -78,7 +78,8 @@ def send():
 		if now != 'processing':
 			for ip in status.keys():
 				if status[ ip ] == 'processing':
-					now = 'waiting'	
+					now = 'waiting'
+					#now = 'idling' # ha senki nem kivancsi 
 		if now == 'hepp':
 			now = 'processing'
 			try:
@@ -149,7 +150,7 @@ def play_hepp( heppFile, loopFile = False ):
 	return True
 
 _thread.start_new_thread(  receive, () ) # elkezdunk hallgatozni
-time.slee( 1 ) # varunk egy kicsit mielott beleszolunk
+time.sleep( 1 ) # varunk egy kicsit mielott beleszolunk
 _thread.start_new_thread(  send, () )
 
 try:
