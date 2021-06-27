@@ -20,3 +20,10 @@ cd ./hepp/Autohotspot
 chmod 0775 ./autohotspot-setup.sh
 sudo ./autohotspot-setup.sh
 ```
+AutoStart
+```
+sudo nano /etc/rc.local
+
+sudo /usr/bin/python3 /home/pi/hepp/hepp.py &
+exit 0
+```
