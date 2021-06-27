@@ -78,7 +78,7 @@ def send():
 	while True:
 		global now
 		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
-			now = 'hepp' # elveszett a token mert mindenki 'waiting'
+			now = 'passing' # elveszett a token mert mindenki 'waiting' ezert 'passing' hatha csak a halozat hianyos.
 		if now != 'processing' and 'processing' in status.values():
 			now = 'waiting' # valaki dolgozik meg 'waiting'
 		if now == 'hepp':
