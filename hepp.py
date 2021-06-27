@@ -53,9 +53,9 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
-				if now != 'processing' and sta.decode() == 'passing':
+				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
 					now = 'hepp'
-			elif sta.decode() == 'passing' and now != 'processing' and not bool( status ):
+			elif now != 'processing' and not bool( status ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
 				now = 'hepp'
 			try:
 				for ip in alive.keys():
@@ -75,9 +75,10 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global now
-		for ip in status.keys():
-			if status[ ip ] == 'processing':
-				now = 'waiting'
+		if now != 'processing':
+			for ip in status.keys():
+				if status[ ip ] == 'processing':
+					now = 'waiting'	
 		if now == 'hepp':
 			now = 'processing'
 			try:
