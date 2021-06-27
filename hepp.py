@@ -154,6 +154,7 @@ _thread.start_new_thread(  send, () )
 
 try:
 	while True:
+		print( 'distance: ', distance.measure() )
 		time.sleep( 1 )
 
 except KeyboardInterrupt:
