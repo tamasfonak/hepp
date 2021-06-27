@@ -77,7 +77,7 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global now
-		if now = 'waiting' and all( s == 'waiting' for s in status.values() ):
+		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
 			now = 'passing' # elveszett a token mindenki 'waiting'
 		if now != 'processing':
 			for ip in status.keys():
