@@ -25,8 +25,11 @@ def compute_token():
 	global now, hepp
 	hepp += 1
 	print( "HEPP", hepp )
-	time.sleep( 5 )
-	#play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+	#time.sleep( 5 )
+	try:
+		play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
+	except:
+		print( 'play_hepp problem!!!' )
 	now = 'passing'
 	return True
 
@@ -50,11 +53,10 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
-				if sta.decode() == 'passing':
+				if now != 'processing' and sta.decode() == 'passing':
 					now = 'hepp'
-			elif sta.decode() == 'passing':
-				if  not bool( status ):
-					now = 'hepp'
+			elif sta.decode() == 'passing' and now != 'processing' and not bool( status ):
+				now = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
@@ -81,7 +83,7 @@ def send():
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
-				print( 'Error staritng compute_token' )
+				print( 'compute_token threas starting problem!!!' )
 				now = 'passing'
 		try:
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
