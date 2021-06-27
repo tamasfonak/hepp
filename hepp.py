@@ -77,7 +77,8 @@ def send():
 		global now
 		if now != 'processing':
 			for ip in status.keys():
-				now = 'passing'
+				if now != 'hepp':
+					now = 'passing' # elveszett token kezelese
 				if status[ ip ] == 'processing':
 					now = 'waiting'
 					#now = 'idling' # ha senki nem kivancsi
