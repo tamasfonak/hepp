@@ -78,7 +78,11 @@ def send():
 				now = 'waiting'
 		if now == 'hepp':
 			now = 'processing'
-			_thread.start_new_thread( compute_token, () )
+			try:
+				_thread.start_new_thread( compute_token, () )
+			except: 
+				print( 'Error staritng compute_token' )
+				now = 'passing'
 		try:
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
