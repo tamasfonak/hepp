@@ -53,10 +53,10 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
-				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
-					now = 'hepp'
-			elif now != 'processing' and not bool( status ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
-				now = 'hepp'
+				#if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
+				#	now = 'hepp'
+			#elif now != 'processing' and not bool( status ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
+			#	now = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
@@ -77,10 +77,11 @@ def send():
 		global now
 		if now != 'processing':
 			for ip in status.keys():
+				now = 'passing'
 				if status[ ip ] == 'processing':
 					now = 'waiting'
-					#now = 'idling' # ha senki nem kivancsi 
-		if now == 'hepp':
+					#now = 'idling' # ha senki nem kivancsi
+		if now == 'passing':
 			now = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
