@@ -75,19 +75,19 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global now
-		if now != 'processing' and now != 'hepp':
-			for ip in status.keys():
-				now = 'passing' # elveszett token kezelese
-				if status[ ip ] == 'processing':
-					now = 'waiting'
-					#now = 'idling' # ha senki nem kivancsi
-		if now == 'hepp':
-			now = 'processing'
-			try:
-				_thread.start_new_thread( compute_token, () )
-			except: 
-				print( 'compute_token threas starting problem!!!' )
-				now = 'passing'
+		match now:
+			case 'waiting' or 'passing':
+				now == 'passing'
+				for ip in status.keys():
+					if status[ ip ] == 'processing':
+						now = 'waiting'
+			case 'hepp':
+				now = 'processing'
+				try:
+					_thread.start_new_thread( compute_token, () )
+				except: 
+					print( 'compute_token threas starting problem!!!' )
+					now = 'passing'
 		try:
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
