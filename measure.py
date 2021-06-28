@@ -9,8 +9,6 @@ GPIO_INTRUDER = 4
 GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
 GPIO.setup( GPIO_INTRUDER, GPIO.IN )
-
-intruder = False
  
 def distance():
 	GPIO.output( GPIO_TRIGGER, True )
@@ -28,10 +26,4 @@ def distance():
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
 
 def intruder():
-	global intruder
-	while True:
-		try:
-			intruder = GPIO.input( GPIO_INTRUDER )
-		except:
-			pass
-		time.sleep( 0.5 )
+	return GPIO.input( GPIO_INTRUDER )
