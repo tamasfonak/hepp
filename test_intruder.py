@@ -1,15 +1,8 @@
-import RPi.GPIO as GPIO
-import time
-
-GPIO.setwarnings( False )
-GPIO.setmode( GPIO.BCM )
-GPIO_INTRUDER = 4
-GPIO.setup( GPIO_INTRUDER, GPIO.IN )
+import measure
 
 while True:
-	i = GPIO.input( GPIO_INTRUDER )
-	if i == 1:
+	if measure.intruder:
 		print( 'Intruder' )
 	else:
-		print( '.' )
+		print( measure.distance() )
 	time.sleep( 0.1 )
