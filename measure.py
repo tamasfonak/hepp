@@ -29,11 +29,11 @@ def dist():
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
 
 def start():
+	global distance
 	while True:
 		fifo.append( dist() )
 		fifo.pop( 0 )
-		print( fifo )
-		print( sum( fifo ) / len( fifo ) )
+		distance = int( fifo ) / len( fifo ) )
 		time.sleep( 1 )
 
 def intruder():
