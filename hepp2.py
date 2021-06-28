@@ -138,6 +138,8 @@ def send():
 	while True:
 		global neighborhood, status
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
+		if 'processing' in neighborhood.values():
+			status = 'waiting'
 		if ( status != 'processing' ) and ( ( status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ) ) or 'passing' in neighborhood.values() ):
 			status = 'processing'
 			try:
@@ -149,8 +151,6 @@ def send():
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( '!!! status send error !!!' )
-			status = 'waiting'
-		if 'processing' in neighborhood.values():
 			status = 'waiting'
 		time.sleep( 1 )
 
