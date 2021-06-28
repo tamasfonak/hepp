@@ -138,7 +138,7 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global neighborhood, status
-		print ('Status' :, status )
+		print ('Status :', status )
 		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
 			status = 'processing'
 			try:
