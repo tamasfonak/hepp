@@ -114,12 +114,17 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	while True:
+		global status
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
-				neighborhood[ addr ] = sta.decode()
+				status[ addr ] = sta.decode()
+				if status != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
+					now = 'hepp'
+			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
+				status = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -136,17 +141,19 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
-		global neighborhood, status
+		global status
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
+		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
+			status = 'passing' # elveszett a token mert mindenki 'waiting' ezert 'passing' hatha csak a halozat hianyos.
 		if status != 'processing' and 'processing' in neighborhood.values():
-			status = 'waiting'
-		if status != 'processing' and 'processing' not in neighborhood.values():
+			status = 'waiting' # valaki dolgozik meg 'waiting'
+		if status == 'hepp':
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
-				status = 'waiting'
+				status = 'passing'
 		try:
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
@@ -157,6 +164,9 @@ def send():
 def compute_token():
 	global status, hepp
 	hepp += 1
+	if 'processing' in neighborhood.values():
+		now = 'waiting'
+		return True
 	print( "HEPP", hepp, 'Neighborhood: ', neighborhood )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
