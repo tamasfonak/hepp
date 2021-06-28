@@ -121,7 +121,7 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				neighborhood[ addr ] = sta.decode()
-				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
+				if status != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
 					status = 'hepp'
 			try:
 				for ip in alive.keys():
