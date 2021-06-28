@@ -140,7 +140,7 @@ def send():
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
 		if status != 'processing' and 'processing' in neighborhood.values():
 			status = 'waiting'
-		if ( status != 'processing' and 'passing' in neighborhood.values() ) or ( status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neighborhood ) ):
+		if ( status != 'processing' and 'passing' in neighborhood.values() ) or ( status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neighborhood ) ) ):
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
