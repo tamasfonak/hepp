@@ -164,7 +164,7 @@ def compute_token():
 	hepp += 1
 	print( "HEPP", hepp )
 	try:
-		play_hepp( hepps[ str( random.randint( 1, 49 ) ) ] )
+		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
 	now = 'passing'
