@@ -13,7 +13,7 @@ GPIO.setup( GPIO_INTRUDER, GPIO.IN )
 distance = 300
 dfifo = [ 300, 300, 300, 300, 300, 300, 300, 300 ]
 intruder = False
-ififo = [ 0, 0, 0, 0, 0, 0, 0, 0 ]
+ififo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 
 def dist():
 	GPIO.output( GPIO_TRIGGER, True )
@@ -31,7 +31,7 @@ def dist():
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
 
 def start():
-	global distance
+	global distance, intruder
 	while True:
 		dfifo.append( dist() )
 		dfifo.pop( 0 )
@@ -39,5 +39,4 @@ def start():
 		ififo.append( int( GPIO.input( GPIO_INTRUDER ) ) )
 		ififo.pop( 0 )
 		intruder = sum( ififo )
-		print( ififo )
 		time.sleep( 0.2 )
