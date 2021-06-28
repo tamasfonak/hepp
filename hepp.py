@@ -164,6 +164,7 @@ def send():
 
 def compute_token():
 	global status, table
+	print( 'Distance :', measure.distance )
 	if 'processing' in neighborhood.values():
 		status = 'waiting'
 		return True
@@ -201,6 +202,7 @@ def play_hepp( heppFile, loopFile = False ):
 	hepp.quit()
 	return True
 
+_thread.start_new_thread( measure.start, () ) 
 _thread.start_new_thread(  receive, () ) # elkezdunk hallgatozni
 time.sleep( 1 ) # varunk egy kicsit mielott beleszolunk
 _thread.start_new_thread(  send, () )
