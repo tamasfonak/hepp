@@ -138,6 +138,7 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global neighborhood, status
+		print ('Status': status )
 		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
 			status = 'processing'
 			try:
@@ -146,7 +147,6 @@ def send():
 				print( '!!! compute_token thread starting error !!!' )
 				status = 'waiting'
 		if status == 'passing':
-			print( 'starus :', status, ' to waiting' )
 			status= 'waiting'
 		try:
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
