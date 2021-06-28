@@ -130,7 +130,7 @@ videos = {
 	'2': '/home/pi/hepp_videos/HEPP_POCOK_2.mp4',
 	'1': '/home/pi/hepp_videos/HEPP_POCOK_1.mp4'
 }
-#loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
+loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 def play_hepp( heppFile, loopFile = False ):
 	hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1', '--win', '0,0,1920,1080', '--alpha', '0' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
