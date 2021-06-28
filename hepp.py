@@ -122,7 +122,7 @@ def receive():
 				alive[ addr ] = time.time()
 				neighborhood[ addr ] = sta.decode()
 				if status != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
-					now = 'hepp'
+					status = 'hepp'
 			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
 				status = 'hepp'
 			try:
@@ -165,7 +165,7 @@ def compute_token():
 	global status, hepp
 	hepp += 1
 	if 'processing' in neighborhood.values():
-		now = 'waiting'
+		status = 'waiting'
 		return True
 	print( "HEPP", hepp, 'Neighborhood: ', neighborhood )
 	try:
