@@ -145,6 +145,8 @@ def send():
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
 				status = 'waiting'
+		if status == 'passing':
+			status= 'waiting'
 		try:
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
