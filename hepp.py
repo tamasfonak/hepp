@@ -129,7 +129,7 @@ def receive():
 			for ip in alive.keys():
 				if ( time.time() - alive[ ip ] ) > 5:
 					alive.pop( ip )
-					neigborhood.pop( ip )
+					neighborhood.pop( ip )
 			#except:
 			#	print( '!!! neighborhood processing error !!!' )
 			lock.release()
