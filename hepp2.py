@@ -150,7 +150,7 @@ def send():
 			print( '!!! status send error !!!' )
 			status = 'waiting'
 		if status == 'passing':
-			status = 'waiting
+			status = 'waiting'
 		time.sleep( 1 )
 
 def compute_token():
