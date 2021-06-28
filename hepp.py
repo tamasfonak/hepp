@@ -126,7 +126,8 @@ def receive():
 			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
 				status = 'hepp'
 			#try:
-			for ip in alive.keys():
+			a = {**alive} # copy 
+			for ip in a.keys():
 				if ( time.time() - alive[ ip ] ) > 5:
 					alive.pop( ip )
 					neighborhood.pop( ip )
