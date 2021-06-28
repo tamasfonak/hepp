@@ -120,7 +120,7 @@ def receive():
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
-				status[ addr ] = sta.decode()
+				neighborhood[ addr ] = sta.decode()
 				if status != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
 					now = 'hepp'
 			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
