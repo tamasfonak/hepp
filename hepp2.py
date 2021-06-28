@@ -141,9 +141,9 @@ def send():
 	while True:
 		global neighborhood, status
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
-		if status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neigborhood ) )
+		if status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neigborhood ) ):
 			status = 'passing'
-		if status != 'processing' and 'processing' in neighborhood.values()
+		if status != 'processing' and 'processing' in neighborhood.values():
 			status = 'waiting'
 		if status == 'hepp':
 			status = 'processing'
