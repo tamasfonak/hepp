@@ -5,4 +5,4 @@ while True:
 		print( 'Intruder' )
 	else:
 		print( measure.distance() )
-	time.sleep( 0.1 )
+	measure.time.sleep( 0.1 )
