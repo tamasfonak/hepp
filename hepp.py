@@ -203,11 +203,10 @@ def play_hepp( heppFile, loopFile = False ):
 	hepp.quit()
 	return True
 
-_thread.start_new_thread( measure.start, () ) 
 _thread.start_new_thread(  receive, () ) # elkezdunk hallgatozni
 time.sleep( 1 ) # varunk egy kicsit mielott beleszolunk
 _thread.start_new_thread(  send, () )
-_thread.start_new_thread(  measure.intruder, () )
+_thread.start_new_thread( measure.start, () ) 
 
 try:
 	while True:
