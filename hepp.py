@@ -162,6 +162,9 @@ def send():
 def compute_token():
 	global now, hepp
 	hepp += 1
+	if 'processing' in status.values():
+		now = 'waiting'
+		return True
 	print( "HEPP", hepp, 'Status: ', status )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
