@@ -9,8 +9,11 @@ GPIO_INTRUDER = 4
 GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
 GPIO.setup( GPIO_INTRUDER, GPIO.IN )
- 
-def distance():
+
+distance = 0
+fifo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+
+def dist():
 	GPIO.output( GPIO_TRIGGER, True )
 	time.sleep( 0.00001 )
 	GPIO.output( GPIO_TRIGGER, False )
@@ -24,6 +27,14 @@ def distance():
 	# multiply with the sonic speed ( 34300 cm/s )
 	# and divide by 2, because there and back
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
+
+def start():
+	while True:
+		fifo.append( dist() )
+		fifo.pop()
+		print( fifo )
+		print( sum( fifo ) / len( fifo ) )
+		time.sleep( 1 )
 
 def intruder():
 	return GPIO.input( GPIO_INTRUDER )
