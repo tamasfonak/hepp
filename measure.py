@@ -35,7 +35,7 @@ def start():
 	while True:
 		dfifo.append( dist() )
 		dfifo.pop( 0 )
-		distance = int( sum( fifo ) / len( fifo ) )
+		distance = int( sum( dfifo ) / len( dfifo ) )
 		ififo.append( int( GPIO.input( GPIO_INTRUDER ) ) )
 		ififo.pop( 0 )
 		intruder = sum( ififo )
