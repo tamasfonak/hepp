@@ -150,7 +150,7 @@ def send():
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( '!!! status send error !!!' )
-		if status = 'passing':
+		if status == 'passing':
 			status = 'waiting'
 		time.sleep( 1 )
 
