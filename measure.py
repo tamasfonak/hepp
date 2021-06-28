@@ -33,8 +33,8 @@ def start():
 	while True:
 		fifo.append( dist() )
 		fifo.pop( 0 )
-		distance = int( fifo ) / len( fifo ) )
-		time.sleep( 1 )
+		distance = int( sum( fifo ) / len( fifo ) )
+		time.sleep( 0.5 )
 
 def intruder():
 	return GPIO.input( GPIO_INTRUDER )
