@@ -150,7 +150,7 @@ def send():
 		except: 
 			print( '!!! status send error !!!' )
 			status = 'waiting'
-		if status == 'passing':
+		if status == 'passing' and 'processing' in neighborhood.values():
 			status = 'waiting'
 		time.sleep( 1 )
 
