@@ -30,7 +30,7 @@ def distance():
 def intruder():
 	global intruder
 	while True:
-		try
+		try:
 			intruder = GPIO.input( GPIO_INTRUDER )
 		except:
 			pass
