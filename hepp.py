@@ -153,6 +153,7 @@ def play_hepp( heppFile, loopFile = False ):
 _thread.start_new_thread(  receive, () ) # elkezdunk hallgatozni
 time.sleep( 1 ) # varunk egy kicsit mielott beleszolunk
 _thread.start_new_thread(  send, () )
+_thread.start_new_thread(  measuer.intruder, () )
 
 try:
 	while True:
