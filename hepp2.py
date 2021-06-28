@@ -139,7 +139,7 @@ def send():
 	while True:
 		global neighborhood, status
 		print ('Status :', status )
-		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
+		if ( status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ) ) or 'passing' in neighborhood.values():
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
