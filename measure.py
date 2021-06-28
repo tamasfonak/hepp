@@ -28,6 +28,5 @@ def distance():
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
 
 while True:
-	global intruder
 	intruder = GPIO.input( GPIO_INTRUDER )
 	time.sleep( 0.5 )
