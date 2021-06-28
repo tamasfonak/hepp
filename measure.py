@@ -3,12 +3,16 @@ import time
 
 GPIO.setwarnings( False )
 GPIO.setmode( GPIO.BCM )
-GPIO_TRIGGER = 18
-GPIO_ECHO = 15
+GPIO_TRIGGER = 15
+GPIO_ECHO = 18
+GPIO_INTRUDER = 4
 GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
+GPIO.setup( GPIO_INTRUDER, GPIO.IN )
+
+intruder = False
  
-def measure():
+def distance():
 	GPIO.output( GPIO_TRIGGER, True )
 	time.sleep( 0.00001 )
 	GPIO.output( GPIO_TRIGGER, False )
@@ -22,3 +26,8 @@ def measure():
 	# multiply with the sonic speed ( 34300 cm/s )
 	# and divide by 2, because there and back
 	return int( ( ( StopTime - StartTime ) * 34300 ) / 2 )
+
+while True:
+	global intruder
+	intruder = GPIO.input( GPIO_INTRUDER )
+	time.sleep( 0.5 )
