@@ -168,14 +168,14 @@ def compute_token():
 		status = 'waiting'
 		return True
 	try:
-		if ( measure.distance() < 100 ) and table:
+		if ( measure.distance() < 10 ) and table:
 			print( 'table goes out' )
 			play_hepp( tables[ table ][ 'tableGO' ], porond )
-		if ( measure.distance() > 100 ) and not table:
+		if ( measure.distance() > 10 ) and not table:
 			print( 'table come in' )
 			table = random.randint( 1, 4 )
 			play_hepp( tables[ table ][ 'tableCI' ], tables[ table ][ 'tableLoop' ] )
-		if ( measure.distance() < 100 ) and not table:
+		if ( measure.distance() < 10 ) and not table:
 			print( 'hepp' )
 			play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
