@@ -22,18 +22,83 @@ alive = {}
 status = {}
 now = 'passing'
 hepp = 0
+videoPath = /home/pi/hepp_videos/CBR10/
+porond = videoPath + 'URES_MANEZS.mp4' 
+tables = {
+	1: {
+		'tableLoop': videoPath + '01_tabla.mp4',
+		'tableCI': videoPath + '01_tabla_BE.mp4',
+		'tableGO': videoPAth + '01_tabla_KI.mp4'
+	},
+	2: {
+		'tableLoop': videoPath + '02_tabla.mp4',
+		'tableCI': videoPath + '02_tabla_BE.mp4',
+		'tableGO': videoPAth + '02_tabla_KI.mp4'
+	},
+	3:{
+		'tableLoop': videoPath + '03_tabla.mp4',
+		'tableCI': videoPath + '03_tabla_BE.mp4',
+		'tableGO': videoPAth + '03_tabla_KI.mp4'
+	},
+	4:{
+		'tableLoop': videoPath + '04_tabla.mp4',
+		'tableCI': videoPath + '04_tabla_BE.mp4',
+		'tableGO': videoPAth + '04_tabla_KI.mp4'
+	}
+}
+hepps = {
+	1: videoPath + 'HEPPek/HEPP_POCOK_01.mp4',
+	2: videoPath + 'HEPPek/HEPP_POCOK_02.mp4',
+	3: videoPath + 'HEPPek/HEPP_POCOK_03.mp4',
+	4: videoPath + 'HEPPek/HEPP_POCOK_04.mp4',
+	5: videoPath + 'HEPPek/HEPP_POCOK_05.mp4',
+	6: videoPath + 'HEPPek/HEPP_POCOK_06.mp4',
+	7: videoPath + 'HEPPek/HEPP_POCOK_07.mp4',
+	8: videoPath + 'HEPPek/HEPP_POCOK_08.mp4',
+	9: videoPath + 'HEPPek/HEPP_POCOK_09.mp4',
+	10: videoPath + 'HEPPek/HEPP_POCOK_10.mp4',
+	11: videoPath + 'HEPPek/HEPP_POCOK_11.mp4',
+	12: videoPath + 'HEPPek/HEPP_POCOK_12.mp4',
+	13: videoPath + 'HEPPek/HEPP_POCOK_13.mp4',
+	14: videoPath + 'HEPPek/HEPP_POCOK_14.mp4',
+	15: videoPath + 'HEPPek/HEPP_POCOK_15.mp4',
+	16: videoPath + 'HEPPek/HEPP_POCOK_16.mp4',
+	17: videoPath + 'HEPPek/HEPP_POCOK_17.mp4',
+	18: videoPath + 'HEPPek/HEPP_POCOK_18.mp4',
+	19: videoPath + 'HEPPek/HEPP_POCOK_19.mp4',
+	20: videoPath + 'HEPPek/HEPP_POCOK_20.mp4',
+	21: videoPath + 'HEPPek/HEPP_POCOK_21.mp4',
+	22: videoPath + 'HEPPek/HEPP_POCOK_22.mp4',
+	23: videoPath + 'HEPPek/HEPP_POCOK_23.mp4',
+	24: videoPath + 'HEPPek/HEPP_POCOK_24.mp4',
+	25: videoPath + 'HEPPek/HEPP_POCOK_25.mp4',
+	26: videoPath + 'HEPPek/HEPP_POCOK_26.mp4',
+	27: videoPath + 'HEPPek/HEPP_POCOK_27.mp4',
+	28: videoPath + 'HEPPek/HEPP_POCOK_28.mp4',
+	29: videoPath + 'HEPPek/HEPP_POCOK_29.mp4',
+	30: videoPath + 'HEPPek/HEPP_POCOK_30.mp4',
+	31: videoPath + 'HEPPek/HEPP_POCOK_31.mp4',
+	32: videoPath + 'HEPPek/HEPP_POCOK_32.mp4',
+	33: videoPath + 'HEPPek/HEPP_POCOK_33.mp4',
+	34: videoPath + 'HEPPek/HEPP_POCOK_34.mp4',
+	35: videoPath + 'HEPPek/HEPP_POCOK_35.mp4',
+	36: videoPath + 'HEPPek/HEPP_POCOK_36.mp4',
+	37: videoPath + 'HEPPek/HEPP_POCOK_37.mp4',
+	38: videoPath + 'HEPPek/HEPP_POCOK_38.mp4',
+	39: videoPath + 'HEPPek/HEPP_POCOK_39.mp4',
+	40: videoPath + 'HEPPek/HEPP_POCOK_40.mp4',
+	41: videoPath + 'HEPPek/HEPP_POCOK_41.mp4',
+	42: videoPath + 'HEPPek/HEPP_POCOK_42.mp4',
+	43: videoPath + 'HEPPek/HEPP_POCOK_43.mp4',
+	44: videoPath + 'HEPPek/HEPP_POCOK_44.mp4',
+	45: videoPath + 'HEPPek/HEPP_POCOK_45.mp4',
+	46: videoPath + 'HEPPek/HEPP_POCOK_46.mp4',
+	47: videoPath + 'HEPPek/HEPP_POCOK_47.mp4',
+	48: videoPath + 'HEPPek/HEPP_POCOK_48.mp4',
+	49: videoPath + 'HEPPek/HEPP_POCOK_49.mp4'
+}
 
-def compute_token():
-	global now, hepp
-	hepp += 1
-	print( "HEPP", hepp, 'Status: ', status )
-	#time.sleep( 5 )
-	try:
-		play_hepp( videos[ str( random.randint( 1, 30 ) ) ] )
-	except:
-		print( 'play_hepp problem!!!' )
-	now = 'passing'
-	return True
+loop = OMXPlayer( Path( porond ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
 def receive():
 	host = get_ip.get_lan_ip()
@@ -65,7 +130,7 @@ def receive():
 						alive.pop( ip )
 						status.pop( ip )
 			except:
-				pass
+				print( '!!! neighborhood processing error !!!' )
 			lock.release()
 		except socket.error:
       			print( 'socket.error!!!')
@@ -86,51 +151,24 @@ def send():
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
-				print( 'compute_token threas starting problem!!!' )
+				print( '!!! compute_token thread starting error !!!' )
 				now = 'passing'
 		try:
 			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
-			print( 'Network error!!!!' )
+			print( '!!! status send error !!!' )
 		time.sleep( 1 )
-		
-videos = {
-        'floorLoop': '/home/pi/hepp_videos/URES_MANEZS_HOSSZU_CBR_10M.mp4',
-        'tableComesIn': '/home/pi/hepp_videos/01_tabla_BE.mp4',
-        'tableLoop': '/home/pi/hepp_videos/01_tabla_TABLA.mp4',
-        'tableGoesOut': '/home/pi/hepp_videos/01_tabla_OUT.mp4',
-	'30': '/home/pi/hepp_videos/HEPP_POCOK_30.mp4',
-	'29': '/home/pi/hepp_videos/HEPP_POCOK_29.mp4',
-	'28': '/home/pi/hepp_videos/HEPP_POCOK_28.mp4',
-	'27': '/home/pi/hepp_videos/HEPP_POCOK_27.mp4',
-	'26': '/home/pi/hepp_videos/HEPP_POCOK_26.mp4',
-	'25': '/home/pi/hepp_videos/HEPP_POCOK_25.mp4',
-	'24': '/home/pi/hepp_videos/HEPP_POCOK_24.mp4',
-	'23': '/home/pi/hepp_videos/HEPP_POCOK_23.mp4',
-	'22': '/home/pi/hepp_videos/HEPP_POCOK_22.mp4',
-	'21': '/home/pi/hepp_videos/HEPP_POCOK_21.mp4',
-	'20': '/home/pi/hepp_videos/HEPP_POCOK_20.mp4',
-	'19': '/home/pi/hepp_videos/HEPP_POCOK_19.mp4',
-	'18': '/home/pi/hepp_videos/HEPP_POCOK_18.mp4',
-	'17': '/home/pi/hepp_videos/HEPP_POCOK_17.mp4',
-	'16': '/home/pi/hepp_videos/HEPP_POCOK_16.mp4',
-	'15': '/home/pi/hepp_videos/HEPP_POCOK_15.mp4',
-	'14': '/home/pi/hepp_videos/HEPP_POCOK_14.mp4',
-	'13': '/home/pi/hepp_videos/HEPP_POCOK_13.mp4',
-	'12': '/home/pi/hepp_videos/HEPP_POCOK_12.mp4',
-	'11': '/home/pi/hepp_videos/HEPP_POCOK_11.mp4',
-	'10': '/home/pi/hepp_videos/HEPP_POCOK_10.mp4',
-	'9': '/home/pi/hepp_videos/HEPP_POCOK_9.mp4',
-	'8': '/home/pi/hepp_videos/HEPP_POCOK_8.mp4',
-	'7': '/home/pi/hepp_videos/HEPP_POCOK_7.mp4',
-	'6': '/home/pi/hepp_videos/HEPP_POCOK_6.mp4',
-	'5': '/home/pi/hepp_videos/HEPP_POCOK_5.mp4',
-	'4': '/home/pi/hepp_videos/HEPP_POCOK_4.mp4',
-	'3': '/home/pi/hepp_videos/HEPP_POCOK_3.mp4',
-	'2': '/home/pi/hepp_videos/HEPP_POCOK_2.mp4',
-	'1': '/home/pi/hepp_videos/HEPP_POCOK_1.mp4'
-}
-loop = OMXPlayer( Path( videos[ 'floorLoop' ] ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
+
+def compute_token():
+	global now, hepp
+	hepp += 1
+	print( "HEPP", hepp )
+	try:
+		play_hepp( hepps[ str( random.randint( 1, 49 ) ) ] )
+	except:
+		print( '!!! play_hepp except !!!' )
+	now = 'passing'
+	return True	
 
 def play_hepp( heppFile, loopFile = False ):
 	hepp = OMXPlayer( Path( heppFile ), args = [ '--no-osd', '--layer', '1', '--win', '0,0,1920,1080', '--alpha', '0' ], dbus_name='org.mpris.MediaPlayer2.hepp' )
