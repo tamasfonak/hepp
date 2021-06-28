@@ -21,7 +21,7 @@ lock = threading.Lock()
 alive = {}
 neighborhood = {}
 status = 'waiting'
-hepp = 0
+table = False
 
 videoPath = '/home/pi/hepp_videos/CBR10/'
 porond = videoPath + 'URES_MANEZS.mp4' 
@@ -162,14 +162,19 @@ def send():
 		time.sleep( random.uniform( 0, 1) )
 
 def compute_token():
-	global status, hepp
+	global status, hepp, table
 	hepp += 1
 	if 'processing' in neighborhood.values():
 		status = 'waiting'
 		return True
 	try:
-		print ( measure.intruder )
-		play_hepp( hepps[ random.randint( 1, 49 ) ] )
+		if ( measure.distance() < 100 ) and table:
+			play_hepp( tables[ table ][ 'tableGO' ], porond )
+		if ( measure.distance() > 100 ) and not table:
+			table = random.randint( 1, 4 )
+			play_hepp( tables[ table ][ 'tableGO' ], ables[ table ][ 'tableLoop' ] )
+		if ( measure.distance() < 100 ) and not table:
+			play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
 	status = 'passing'
