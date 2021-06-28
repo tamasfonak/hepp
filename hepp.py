@@ -28,22 +28,22 @@ tables = {
 	1: {
 		'tableLoop': videoPath + '01_tabla.mp4',
 		'tableCI': videoPath + '01_tabla_BE.mp4',
-		'tableGO': videoPAth + '01_tabla_KI.mp4'
+		'tableGO': videoPath + '01_tabla_KI.mp4'
 	},
 	2: {
 		'tableLoop': videoPath + '02_tabla.mp4',
 		'tableCI': videoPath + '02_tabla_BE.mp4',
-		'tableGO': videoPAth + '02_tabla_KI.mp4'
+		'tableGO': videoPath + '02_tabla_KI.mp4'
 	},
 	3:{
 		'tableLoop': videoPath + '03_tabla.mp4',
 		'tableCI': videoPath + '03_tabla_BE.mp4',
-		'tableGO': videoPAth + '03_tabla_KI.mp4'
+		'tableGO': videoPath + '03_tabla_KI.mp4'
 	},
 	4:{
 		'tableLoop': videoPath + '04_tabla.mp4',
 		'tableCI': videoPath + '04_tabla_BE.mp4',
-		'tableGO': videoPAth + '04_tabla_KI.mp4'
+		'tableGO': videoPath + '04_tabla_KI.mp4'
 	}
 }
 hepps = {
