@@ -22,7 +22,7 @@ alive = {}
 status = {}
 now = 'passing'
 hepp = 0
-videoPath = /home/pi/hepp_videos/CBR10/
+videoPath = '/home/pi/hepp_videos/CBR10/'
 porond = videoPath + 'URES_MANEZS.mp4' 
 tables = {
 	1: {
