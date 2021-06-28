@@ -114,12 +114,15 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	while True:
+		global status
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
 				neighborhood[ addr ] = sta.decode()
+				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
+					status = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -138,9 +141,11 @@ def send():
 	while True:
 		global neighborhood, status
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
-		if 'processing' in neighborhood.values():
+		if status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neigborhood ) )
+			status = 'passing'
+		if status != 'processing' and 'processing' in neighborhood.values()
 			status = 'waiting'
-		if ( status != 'processing' and 'processing' not in neighborhood.values() ) and ( ( status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ) ) or 'passing' in neighborhood.values() ):
+		if status == 'hepp':
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
