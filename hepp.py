@@ -19,9 +19,10 @@ MCAST_PORT = 5007
 lock = threading.Lock()
 
 alive = {}
-status = {}
-now = 'passing'
+neighborhood = {}
+status = 'waiting'
 hepp = 0
+
 videoPath = '/home/pi/hepp_videos/CBR10/'
 porond = videoPath + 'URES_MANEZS.mp4' 
 tables = {
@@ -113,22 +114,21 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	while True:
-		global now
+		global status
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
-				status[ addr ] = sta.decode()
+				neighborhood[ addr ] = sta.decode()
 				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
-					now = 'hepp'
-			elif now != 'processing' and not bool( status ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
-				now = 'hepp'
+					status = 'hepp'
+			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
+				status = 'hepp'
 			try:
 				for ip in alive.keys():
-					if ( time.time() - alive[ ip ] ) > 3:
-						alive.pop( ip )
-						status.pop( ip )
+					if ( time.time() - alive[ ip ] ) > 5:
+						neighborhood[ ip ] = 'waiting'
 			except:
 				print( '!!! neighborhood processing error !!!' )
 			lock.release()
@@ -141,36 +141,38 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
-		global now
-		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
-			now = 'passing' # elveszett a token mert mindenki 'waiting' ezert 'passing' hatha csak a halozat hianyos.
-		if now != 'processing' and 'processing' in status.values():
-			now = 'waiting' # valaki dolgozik meg 'waiting'
-		if now == 'hepp':
-			now = 'processing'
+		global neighborhood, status
+		print( 'Status :', status, 'Neighborhood:', neighborhood )
+		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
+			status = 'passing'
+		if status != 'processing' and 'processing' in neighborhood.values():
+			status = 'waiting'
+		if status == 'hepp':
+			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
-				now = 'passing'
+				status = 'passing'
 		try:
-			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
+			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( '!!! status send error !!!' )
+			status = 'waiting'
 		time.sleep( 1 )
 
 def compute_token():
-	global now, hepp
+	global status, hepp
 	hepp += 1
-	if 'processing' in status.values():
-		now = 'waiting'
+	if 'processing' in neighborhood.values():
+		status = 'waiting'
 		return True
-	print( "HEPP", hepp, 'Status: ', status )
+	print( "HEPP", hepp, 'Neighborhood: ', neighborhood )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	now = 'passing'
+	status = 'passing'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
