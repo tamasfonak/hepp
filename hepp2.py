@@ -114,7 +114,6 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	while True:
-		global now
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 			lock.acquire()
@@ -138,32 +137,32 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
-		global now
-		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
-			now = 'processing'
+		global status
+		if status == 'waiting' and all( s == 'waiting' for s in status.values() ):
+			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
-				now = 'passing'
+				status = 'waiting'
 		try:
-			sock.sendto( now.encode(), ( MCAST_GRP, MCAST_PORT ) )
+			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
 			print( '!!! status send error !!!' )
 		time.sleep( 1 )
 
 def compute_token():
-	global now, hepp
+	global status, hepp
 	hepp += 1
 	if 'processing' in status.values():
-		now = 'waiting'
+		status = 'waiting'
 		return True
 	print( "HEPP", hepp, 'Status: ', status )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	now = 'waiting'
+	status = 'waiting'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
