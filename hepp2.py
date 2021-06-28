@@ -122,9 +122,8 @@ def receive():
 				neighborhood[ addr ] = sta.decode()
 			try:
 				for ip in alive.keys():
-					if ( time.time() - alive[ ip ] ) > 3:
-						alive.pop( ip )
-						neighborhood.pop( ip )
+					if ( time.time() - alive[ ip ] ) > 5:
+						neighborhood[ ip ] = 'waiting'
 			except:
 				print( '!!! neighborhood processing error !!!' )
 			lock.release()
@@ -138,18 +137,18 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global neighborhood, status
-		print ('Status :', status )
 		if ( status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ) ) or 'passing' in neighborhood.values():
 			status = 'processing'
+		try:
+			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
+		except: 
+			print( '!!! status send error !!!' )
+		if status == 'processing':
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
 				status = 'waiting'
-		try:
-			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
-		except: 
-			print( '!!! status send error !!!' )
 		if status == 'passing':
 			status = 'waiting'
 		time.sleep( 1 )
