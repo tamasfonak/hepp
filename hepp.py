@@ -140,7 +140,7 @@ def send():
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
 		if status != 'processing' and 'processing' in neighborhood.values():
 			status = 'waiting'
-		if status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neighborhood ) ):
+		if ( status != 'processing' and 'passing' in neighborhood.values() ) or ( status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neighborhood ) ):
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
@@ -157,15 +157,12 @@ def send():
 def compute_token():
 	global status, hepp
 	hepp += 1
-	if 'processing' in neighborhood.values():
-		status = 'waiting'
-		return True
 	print( "HEPP", hepp, 'Neighborhood: ', neighborhood )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	status = 'waiting'
+	status = 'passing'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
