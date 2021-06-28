@@ -5,7 +5,7 @@ import random
 from omxplayer.player import OMXPlayer 
 from pathlib import Path 
 import _thread 
-import distance
+import measure
 import socket
 import time
 import threading
