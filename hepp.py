@@ -159,7 +159,7 @@ def send():
 		except: 
 			print( '!!! status send error !!!' )
 			status = 'waiting'
-		time.sleep( 1 )
+		time.sleep( random.uniform( 0, 1) )
 
 def compute_token():
 	global status, hepp
