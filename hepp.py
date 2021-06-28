@@ -125,13 +125,13 @@ def receive():
 					status = 'hepp'
 			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
 				status = 'hepp'
-			try:
-				for ip in alive.keys():
-					if ( time.time() - alive[ ip ] ) > 5:
-						alive.pop( ip )
-						neigborhood.pop( ip )
-			except:
-				print( '!!! neighborhood processing error !!!' )
+			#try:
+			for ip in alive.keys():
+				if ( time.time() - alive[ ip ] ) > 5:
+					alive.pop( ip )
+					neigborhood.pop( ip )
+			#except:
+			#	print( '!!! neighborhood processing error !!!' )
 			lock.release()
 		except socket.error:
       			print( 'socket.error!!!')
