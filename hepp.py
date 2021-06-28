@@ -195,7 +195,7 @@ _thread.start_new_thread(  measure.intruder, () )
 
 try:
 	while True:
-		print( 'distance: ', distance.measure() )
+		print( 'distance: ', measure.distance() )
 		time.sleep( 1 )
 
 except KeyboardInterrupt:
