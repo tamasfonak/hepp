@@ -162,7 +162,7 @@ def send():
 def compute_token():
 	global now, hepp
 	hepp += 1
-	print( "HEPP", hepp )
+	print( "HEPP", hepp, 'Status: ', status )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
