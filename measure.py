@@ -10,8 +10,8 @@ GPIO.setup( GPIO_TRIGGER, GPIO.OUT )
 GPIO.setup( GPIO_ECHO, GPIO.IN )
 GPIO.setup( GPIO_INTRUDER, GPIO.IN )
 
-distance = 0
-fifo = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+distance = 300
+fifo = [ 300, 300, 300, 300, 300, 300, 300, 300, 300 ]
 
 def dist():
 	GPIO.output( GPIO_TRIGGER, True )
