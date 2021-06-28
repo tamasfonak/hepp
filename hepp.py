@@ -159,7 +159,7 @@ def send():
 		except: 
 			print( '!!! status send error !!!' )
 			status = 'waiting'
-		print( measure.distance() )
+		print( measure.distance )
 		time.sleep( random.uniform( 0, 1) )
 
 def compute_token():
