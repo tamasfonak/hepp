@@ -39,5 +39,5 @@ def start():
 		ififo.append( int( GPIO.input( GPIO_INTRUDER ) ) )
 		ififo.pop( 0 )
 		intruder = sum( ififo )
-		print( iffo )
+		print( ififo )
 		time.sleep( 0.2 )
