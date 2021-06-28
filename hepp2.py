@@ -165,7 +165,7 @@ def compute_token():
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	status = 'waiting'
+	status = 'passing'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
