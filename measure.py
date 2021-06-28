@@ -30,7 +30,8 @@ def dist():
 
 def start():
 	while True:
-		fifo.append( dist() ).pop( 0 )
+		fifo.append( dist() )
+		fifo.pop( 0 )
 		print( fifo )
 		print( sum( fifo ) / len( fifo ) )
 		time.sleep( 1 )
