@@ -142,7 +142,7 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
 		global status
-		print( 'Status :', status, 'Neighborhood:', neighborhood )
+		print( 'Status :', status )
 		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
 			status = 'passing' # elveszett a token mert mindenki 'waiting' ezert 'passing' hatha csak a halozat hianyos.
 		if status != 'processing' and 'processing' in neighborhood.values():
