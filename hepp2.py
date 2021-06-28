@@ -119,12 +119,12 @@ def receive():
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
-				status[ addr ] = sta.decode()
+				neighborhood[ addr ] = sta.decode()
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
 						alive.pop( ip )
-						status.pop( ip )
+						neighborhood.pop( ip )
 			except:
 				print( '!!! neighborhood processing error !!!' )
 			lock.release()
@@ -137,8 +137,8 @@ def send():
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 32 )
 	sock.setsockopt( socket.IPPROTO_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	while True:
-		global status
-		if status == 'waiting' and all( s == 'waiting' for s in status.values() ):
+		global neighborhood
+		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
@@ -154,10 +154,10 @@ def send():
 def compute_token():
 	global status, hepp
 	hepp += 1
-	if 'processing' in status.values():
+	if 'processing' in neighborhood.values():
 		status = 'waiting'
 		return True
-	print( "HEPP", hepp, 'Status: ', status )
+	print( "HEPP", hepp, 'Neighborhood: ', neighborhood )
 	try:
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
