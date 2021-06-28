@@ -1,7 +1,5 @@
 import socket
-import binascii
 import time
-import json
 import threading
 import _thread
 import get_ip
@@ -14,12 +12,12 @@ MCAST_PORT = 5007
 
 def alive():
 	while True:
+		lock.acquire()
 		for ip in ips.keys():
-			lock.acquire()
 			if ( time.time() - ips[ ip ] ) > 5:
 				ips.pop( ip )
-			lock.release()
-		time.sleep( 5 )
+		lock.release()
+		time.sleep( 3 )
 
 def receive():
 	_thread.start_new_thread( alive, () )
@@ -58,4 +56,4 @@ def send():
 
 	while True:
 		sock.sendto( host.encode(), ( MCAST_GRP, MCAST_PORT ) )
-		time.sleep( 3 )
+		time.sleep( 1 )
