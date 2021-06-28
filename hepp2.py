@@ -19,9 +19,10 @@ MCAST_PORT = 5007
 lock = threading.Lock()
 
 alive = {}
-status = {}
-now = 'passing'
+neighborhood = {}
+status = 'waiting'
 hepp = 0
+
 videoPath = '/home/pi/hepp_videos/CBR10/'
 porond = videoPath + 'URES_MANEZS.mp4' 
 tables = {
@@ -120,10 +121,6 @@ def receive():
 			if addr != host:
 				alive[ addr ] = time.time()
 				status[ addr ] = sta.decode()
-				if now != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
-					now = 'hepp'
-			elif now != 'processing' and not bool( status ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
-				now = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 3:
@@ -143,10 +140,6 @@ def send():
 	while True:
 		global now
 		if now == 'waiting' and all( s == 'waiting' for s in status.values() ):
-			now = 'passing' # elveszett a token mert mindenki 'waiting' ezert 'passing' hatha csak a halozat hianyos.
-		if now != 'processing' and 'processing' in status.values():
-			now = 'waiting' # valaki dolgozik meg 'waiting'
-		if now == 'hepp':
 			now = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
@@ -170,7 +163,7 @@ def compute_token():
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	now = 'passing'
+	now = 'waiting'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
