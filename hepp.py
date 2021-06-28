@@ -114,17 +114,12 @@ def receive():
 	sock.setsockopt( socket.SOL_IP, socket.IP_MULTICAST_IF, socket.inet_aton( host ) )
 	sock.setsockopt( socket.SOL_IP, socket.IP_ADD_MEMBERSHIP, socket.inet_aton( MCAST_GRP ) + socket.inet_aton( host ) )
 	while True:
-		global status
 		try:
 			sta, ( addr, port ) = sock.recvfrom( 1024 )
 			lock.acquire()
 			if addr != host:
 				alive[ addr ] = time.time()
 				neighborhood[ addr ] = sta.decode()
-				if status != 'processing' and sta.decode() == 'passing': # ha valaki kuld egy 'passing'-ot es nem 'processing' akkor hepp
-					status = 'hepp'
-			elif status != 'processing' and not bool( neighborhood ): # barmit kuld maganak, ha nem 'processing' akkor 'hepp'
-				status = 'hepp'
 			try:
 				for ip in alive.keys():
 					if ( time.time() - alive[ ip ] ) > 5:
@@ -143,17 +138,15 @@ def send():
 	while True:
 		global neighborhood, status
 		print( 'Status :', status, 'Neighborhood:', neighborhood )
-		if status == 'waiting' and all( s == 'waiting' for s in neighborhood.values() ):
-			status = 'passing'
 		if status != 'processing' and 'processing' in neighborhood.values():
 			status = 'waiting'
-		if status == 'hepp':
+		if status == 'waiting' and ( all( s == 'waiting' for s in neighborhood.values() ) or not bool( neighborhoods ) ):
 			status = 'processing'
 			try:
 				_thread.start_new_thread( compute_token, () )
 			except: 
 				print( '!!! compute_token thread starting error !!!' )
-				status = 'passing'
+				status = 'waiting'
 		try:
 			sock.sendto( status.encode(), ( MCAST_GRP, MCAST_PORT ) )
 		except: 
@@ -172,7 +165,7 @@ def compute_token():
 		play_hepp( hepps[ random.randint( 1, 49 ) ] )
 	except:
 		print( '!!! play_hepp except !!!' )
-	status = 'passing'
+	status = 'waiting'
 	return True	
 
 def play_hepp( heppFile, loopFile = False ):
