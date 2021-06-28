@@ -1,0 +1,14 @@
+[Unit]
+Description=HEPP
+After=multi-user.target
+Requires=network.target
+
+[Service]
+Type=idle
+User=pi
+Restart=always
+RestartSec=60
+ExecStart=/usr/bin/python3 /home/pi/hepp/hepp.py
+
+[Install]
+WantedBy=multi-user.target
