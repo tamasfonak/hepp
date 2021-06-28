@@ -162,8 +162,7 @@ def send():
 		time.sleep( random.uniform( 0, 1) )
 
 def compute_token():
-	global status, hepp, table
-	hepp += 1
+	global status, table
 	if 'processing' in neighborhood.values():
 		status = 'waiting'
 		return True
