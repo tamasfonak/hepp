@@ -96,8 +96,11 @@ hepps = {
 	46: videoPath + 'HEPPek/HEPP_POCOK_46.mp4',
 	47: videoPath + 'HEPPek/HEPP_POCOK_47.mp4',
 	48: videoPath + 'HEPPek/HEPP_POCOK_48.mp4',
-	49: videoPath + 'HEPPek/HEPP_POCOK_49.mp4'
+	49: videoPath + 'HEPPek/HEPP_POCOK_49.mp4',
+	50: videoPath + 'HEPPek/HEPP_POCOK_50.mp4'
 }
+
+time.sleep( 1 )
 
 loop = OMXPlayer( Path( porond ), args = [ '--no-osd', '--loop', '--layer', '0', '--win', '0,0,1920,1080' ], dbus_name = 'org.mpris.MediaPlayer2.loop' )
 
@@ -169,14 +172,14 @@ def compute_token():
 		status = 'waiting'
 		return True
 	try:
-		if ( measure.distance < 300 ) and not table:
+		if ( measure.distance < 300 or measure.intruder > 5 ) and not table:
 			print( 'hepp' )
-			play_hepp( hepps[ random.randint( 1, 49 ) ] )
-		elif ( measure.distance < 300 ) and table:
+			play_hepp( hepps[ random.randint( 1, 50 ) ] )
+		elif ( measure.distance < 300 or measure.intruder > 5 ) and table:
 			print( 'table goes out' )
 			play_hepp( tables[ table ][ 'tableGO' ], porond )
 			table = False
-		elif ( measure.distance > 300 ) and not table:
+		elif ( measure.distance > 300 or measure.intruder > 5 ) and not table:
 			print( 'table come in' )
 			table = random.randint( 1, 4 )
 			play_hepp( tables[ table ][ 'tableCI' ], tables[ table ][ 'tableLoop' ] )
